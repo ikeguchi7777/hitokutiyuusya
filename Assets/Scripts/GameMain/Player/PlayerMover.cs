@@ -181,6 +181,7 @@ public class PlayerMover : MonoBehaviour
     }
     private void OnDestroy()
     {
+        if(playerCamera)
         Destroy(playerCamera.gameObject);
     }
 }

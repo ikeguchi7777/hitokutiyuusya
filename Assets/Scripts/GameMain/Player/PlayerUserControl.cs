@@ -81,7 +81,6 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>
         {
             var h = Input.GetAxis(owner.PlayerKey.X);
             var v = Input.GetAxis(owner.PlayerKey.Y);
-            
             owner.playerMover.Move(h,v);
         }
     }
