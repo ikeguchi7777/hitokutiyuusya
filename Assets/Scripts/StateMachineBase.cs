@@ -5,9 +5,12 @@ public class State<T>
     // このステートを利用するインスタンス
     protected T owner;
 
-    public State(T owner)
+    public int id;
+
+    public State(T owner, System.IConvertible id)
     {
         this.owner = owner;
+        this.id = id.ToInt32(null);
     }
 
     /// <summary>
@@ -70,7 +73,7 @@ public abstract class StatefulObjectBase<T, TEnum> : MonoBehaviour
     /// </summary>
     public virtual void ChangeState(TEnum state)
     {
-        stateMachine.ChangeState(stateList[state.ToInt32(null)]);
+        stateMachine.ChangeState(FindState(state));
     }
 
     /// <summary>
@@ -78,7 +81,12 @@ public abstract class StatefulObjectBase<T, TEnum> : MonoBehaviour
     /// </summary>
     public virtual bool IsCurrentState(TEnum state)
     {
-        return stateMachine.CurrentState == stateList[state.ToInt32(null)];
+        return stateMachine.CurrentState == FindState(state);
+    }
+
+    private State<T> FindState(TEnum state)
+    {
+        return stateList.Find(x => x.id == state.ToInt32(null));
     }
 
     /// <summary>
