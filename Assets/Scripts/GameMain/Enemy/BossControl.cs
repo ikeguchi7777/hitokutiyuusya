@@ -6,7 +6,8 @@ public enum BossState
 {
     Idle
 }
-public class BossControl : EnemyControl<BossControl,BossState> {
+public class BossControl : EnemyControl<BossControl, BossState>
+{
     protected override BossState GetFirstState()
     {
         return BossState.Idle;
@@ -18,7 +19,7 @@ public class BossControl : EnemyControl<BossControl,BossState> {
     }
     class StateIdle : State<BossControl>
     {
-        public StateIdle(BossControl owner) : base(owner)
+        public StateIdle(BossControl owner) : base(owner, BossState.Idle)
         {
         }
     }
