@@ -19,7 +19,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
         if (isDebug)
         {
             PlayerID.Instance.Init();
-            PlayerID.Instance.PlayerTypes[0] = PlayerType.Witch;
+            //PlayerID.Instance.PlayerTypes[0] = PlayerType.Witch;
             //PlayerID.Instance.PlayerTypes[1] = PlayerType.Witch;
             //PlayerID.Instance.PlayerTypes[2] = PlayerType.Witch;
             //PlayerID.Instance.PlayerTypes[3] = PlayerType.Witch;
