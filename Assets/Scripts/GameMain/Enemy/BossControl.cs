@@ -17,10 +17,15 @@ public class BossControl : EnemyControl<BossControl, BossState>
     {
         stateList.Add(new StateIdle(this));
     }
+
     class StateIdle : State<BossControl>
     {
         public StateIdle(BossControl owner) : base(owner, BossState.Idle)
         {
+        }
+        public override void Enter()
+        {
+            
         }
     }
 }
