@@ -79,7 +79,7 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
         {
             owner.animator.SetBool("Attack", true);
             owner.agent.speed = 0.0f;
-            owner.defaultAngularSpeed /= 3;
+            owner.agent.angularSpeed /= 3;
         }
 
         public override void Execute()
