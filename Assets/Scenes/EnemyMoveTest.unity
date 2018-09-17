@@ -505,7 +505,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139718bbf388be74abfe7611924563c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
-  Attack: 0
-  Defence: 0
-  Critical: 1

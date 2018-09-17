@@ -49,8 +49,8 @@ public class PlayerMover : MonoBehaviour
         ikLookAt.enabled = isLockon;
         if (isLockon)
         {
-            LockOn();
-            playerCamera.ChangeState(CameraState.LockOn);
+            if (LockOn())
+                playerCamera.ChangeState(CameraState.LockOn);
         }
         else
         {
@@ -59,15 +59,16 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-    public void LockOn()
+    public bool LockOn()
     {
         var enemylist = InstantiateObjectManager.Instance.EnemyList.FindAll(x => (x.cameraFlag & CameraFlag) != 0);
         if (enemylist.Count == 0)
         {
             SwitchLockOn();
-            return;
+            return false;
         }
         SetLockOnObject(enemylist);
+        return true;
     }
     void SetLockOnObject(List<LockOnable> enemylist)
     {
@@ -181,7 +182,7 @@ public class PlayerMover : MonoBehaviour
     }
     private void OnDestroy()
     {
-        if(playerCamera)
-        Destroy(playerCamera.gameObject);
+        if (playerCamera)
+            Destroy(playerCamera.gameObject);
     }
 }

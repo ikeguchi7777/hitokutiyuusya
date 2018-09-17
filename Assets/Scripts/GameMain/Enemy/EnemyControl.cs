@@ -43,27 +43,7 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
     {
         cameraFlag = 0;
     }
-    private void OnWillRenderObject()
-    {
-        switch (Camera.current.tag)
-        {
-            case "1P":
-                cameraFlag |= 1;
-                break;
-            case "2P":
-                cameraFlag |= 2;
-                break;
-            case "3P":
-                cameraFlag |= 4;
-                break;
-            case "4P":
-                cameraFlag |= 8;
-                break;
-            default:
-                Debug.LogError(Camera.current.tag + "がレンダリングされている。");
-                break;
-        }
-    }
+
     private void OnDestroy()
     {
         InstantiateObjectManager.Instance.RemoveEnemy(this);
