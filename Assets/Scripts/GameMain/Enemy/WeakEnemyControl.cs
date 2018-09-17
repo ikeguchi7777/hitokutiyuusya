@@ -2,17 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public enum WeakEnemyState
 {
     Idle,
     Chase,
-    Attack
+    Attack,
+    Damage
 }
 
 public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
 {
+    [SerializeField]
+    bool isDamage;
     Transform targetTransform;
+
     protected override WeakEnemyState GetFirstState()
     {
         return WeakEnemyState.Idle;
@@ -23,6 +28,17 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
         stateList.Add(new StateIdle(this));
         stateList.Add(new StateChase(this));
         stateList.Add(new StateAttack(this));
+        stateList.Add(new StateDamage(this));
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (isDamage == true)
+        {
+            isDamage = false;
+            ChangeState(WeakEnemyState.Damage);
+        }
     }
 
     class StateIdle : State<WeakEnemyControl>
@@ -49,7 +65,6 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
 
         public override void Enter()
         {
-            Debug.Log("Enter");
             owner.agent.speed = owner.defaultSpeed;
             owner.agent.angularSpeed = owner.defaultAngularSpeed;
         }
@@ -91,6 +106,28 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
                 owner.animator.SetBool("Attack", false);
                 owner.ChangeState(WeakEnemyState.Idle);
             }
+        }
+
+        public override void Exit()
+        {
+            owner.animator.SetFloat("Forward", 0.0f);
+        }
+    }
+
+    class StateDamage : State<WeakEnemyControl>
+    {
+        float speed, angular;
+        public StateDamage(WeakEnemyControl owner) : base(owner, WeakEnemyState.Damage)
+        {}
+        public override void Enter()
+        {
+            owner.animator.SetTrigger("Damage");
+            speed = owner.agent.speed;
+            angular = owner.agent.angularSpeed;
+            owner.agent.speed = 0.0f;
+            owner.agent.angularSpeed = 0;
+            owner.animator.SetFloat("Forward", 0);
+            Observable.Timer(TimeSpan.FromSeconds(0.833f)).Subscribe(_ => owner.ChangeState(WeakEnemyState.Idle));
         }
     }
 }

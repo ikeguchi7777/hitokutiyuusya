@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfa49af06cda5d4498e66f806a65908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titlePanel: {fileID: 0}
+  rankingPanel: {fileID: 0}
 --- !u!114 &243513510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +240,7 @@ MonoBehaviour:
   - {fileID: 1941583270640188, guid: 0ef0d232569e3a74bb080796092f9791, type: 2}
   - {fileID: 1941583270640188, guid: 0ef0d232569e3a74bb080796092f9791, type: 2}
   Camera: {fileID: 1066903115528718, guid: 9ebea831a5757dc4ea75b5223abad4da, type: 2}
-  Enemy: {fileID: 1035187168222058, guid: 8f8ad57d14592b245bed6d504a1df35d, type: 2}
+  Enemy: {fileID: 1752726212707352, guid: be1672b9d2051d946bf616c55e9f363b, type: 2}
 --- !u!1 &561746651
 GameObject:
   m_ObjectHideFlags: 0
