@@ -26,7 +26,7 @@ public class EnemyRenderFlag : MonoBehaviour
                 parent.cameraFlag |= 8;
                 break;
             default:
-                Debug.LogError(Camera.current.tag + "がレンダリングされている。");
+                //Debug.LogError(Camera.current.tag + "がレンダリングされている。");
                 break;
         }
     }

@@ -116,14 +116,11 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
 
     class StateDamage : State<WeakEnemyControl>
     {
-        float speed, angular;
         public StateDamage(WeakEnemyControl owner) : base(owner, WeakEnemyState.Damage)
         {}
         public override void Enter()
         {
             owner.animator.SetTrigger("Damage");
-            speed = owner.agent.speed;
-            angular = owner.agent.angularSpeed;
             owner.agent.speed = 0.0f;
             owner.agent.angularSpeed = 0;
             owner.animator.SetFloat("Forward", 0);
