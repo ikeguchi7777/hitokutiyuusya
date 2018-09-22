@@ -19,7 +19,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
         if (isDebug)
         {
             PlayerID.Instance.Init();
-            //PlayerID.Instance.PlayerTypes[0] = PlayerType.Witch;
+            PlayerID.Instance.PlayerTypes[0] = PlayerType.Witch;
             //PlayerID.Instance.PlayerTypes[1] = PlayerType.Witch;
             //PlayerID.Instance.PlayerTypes[2] = PlayerType.Witch;
             //PlayerID.Instance.PlayerTypes[3] = PlayerType.Witch;
@@ -74,7 +74,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             y = 0.500f;
         if ((num == 1 || num == 3) && length != 2)
             x = 0.500f;
-        var width = length < 2 ? 1.000f : 0.500f;
+        var width = length <= 2 ? 1.000f : 0.500f;
         var height = length == 1 ? 1.000f : 0.500f;
         return new Rect(x, y, width, height);
     }

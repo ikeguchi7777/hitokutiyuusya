@@ -11,7 +11,7 @@ public enum PlayerState
     SpecialAttack
 }
 
-public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>
+public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
     where T : PlayerUserControl<T>
 {
     PlayerInputKey PlayerKey = new PlayerInputKey(1); //debug
@@ -50,6 +50,11 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>
     {
         stateList.Add(new StateMoveable(this as T));
         stateList.Add(new StateEvade(this as T));
+    }
+
+    public void Damage(float atk, float cri)
+    {
+
     }
 
     #region State
