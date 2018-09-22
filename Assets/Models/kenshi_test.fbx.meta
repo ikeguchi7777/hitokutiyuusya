@@ -211,7 +211,82 @@ ModelImporter:
     9500000: //RootNode
     13700000: Plane.005
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: beruto
+    second: {fileID: 2100000, guid: 47e757022774bf6409ab75fa409d96a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: berutodome
+    second: {fileID: 2100000, guid: 99dad4b648d79274089ace38ced29271, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kami
+    second: {fileID: 2100000, guid: 3e7cce3b1fcb2c24e8309ba67f7471ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: karada
+    second: {fileID: 2100000, guid: 04fa61fef1f0abe4ba99c7a223ed5bf0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ken
+    second: {fileID: 2100000, guid: 0d0f7f5f040a6f4459e50bebfcb42af1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ko-to
+    second: {fileID: 2100000, guid: 768e226b27ce57f43ad5e97f33f7eece, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kuti
+    second: {fileID: 2100000, guid: 1bd33548210a4d142a5a252206919552, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kutu
+    second: {fileID: 2100000, guid: 44cbd0e666dc6f54b834900170ac4f2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mayuge
+    second: {fileID: 2100000, guid: 6ae87c46a3ffdc046b5c9fa27ec84048, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mehidari
+    second: {fileID: 2100000, guid: 1fb785b11a7601b44be1a0681e4b92bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: memigi
+    second: {fileID: 2100000, guid: 20993f6f63098a344aada7ec5fa739eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: muneate
+    second: {fileID: 2100000, guid: 86a9feec1bad58b4098268253362791e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sirome
+    second: {fileID: 2100000, guid: 55b4e2fd56f1202489ae27d2d3162065, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tuka
+    second: {fileID: 2100000, guid: ac460d4fe62c07e4a80c75f13f3cb827, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zubon
+    second: {fileID: 2100000, guid: 9e311db9b1837614e99473853f7fe6b8, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
