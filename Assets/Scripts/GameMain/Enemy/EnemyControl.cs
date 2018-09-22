@@ -1,14 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public abstract class EnemyControl<T, TEnum> : StatefulObjectBase<T, TEnum> , LockOnable
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
+public abstract class EnemyControl<T, TEnum> : StatefulObjectBase<T, TEnum>, LockOnable
 where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
 {
     private static int enemyNum = 0;
+    protected NavMeshAgent agent;
+    protected Animator animator;
+    protected float defaultAngularSpeed, defaultSpeed;
+
     public int ID { get; set; }
 
     public int cameraFlag { get; set; }
+    public bool AttackFlag { protected get; set; }
 
     public Transform TargetTransform
     {
@@ -23,6 +31,11 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
         base.Awake();
         ID = enemyNum;
         enemyNum++;
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        defaultAngularSpeed = agent.angularSpeed;
+        defaultSpeed = agent.speed;
+        AttackFlag = false;
         InstantiateObjectManager.Instance.EnemyList.Add(this);
     }
 

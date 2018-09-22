@@ -55,15 +55,16 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>
     #region State
     protected class StateMoveable : State<T>
     {
-        public StateMoveable(T owner) : base(owner) { }
+        public StateMoveable(T owner) : base(owner, PlayerState.Moveable) { }
 
         public override void Execute()
         {
-            if(Input.GetButtonDown(owner.PlayerKey.Evade))
+            if (Input.GetButtonDown(owner.PlayerKey.Evade))
             {
                 owner.ChangeState(PlayerState.Evade);
                 return;
-            }else if (Input.GetButtonDown(owner.PlayerKey.WeakAttack))
+            }
+            else if (Input.GetButtonDown(owner.PlayerKey.WeakAttack))
             {
                 owner.ChangeState(PlayerState.WeakAttack);
             }
@@ -81,13 +82,13 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>
         {
             var h = Input.GetAxis(owner.PlayerKey.X);
             var v = Input.GetAxis(owner.PlayerKey.Y);
-            owner.playerMover.Move(h,v);
+            owner.playerMover.Move(h, v);
         }
     }
 
     protected class StateEvade : State<T>
     {
-        public StateEvade(T owner) : base(owner) { }
+        public StateEvade(T owner) : base(owner, PlayerState.Evade) { }
         float time;
 
         public override void Enter()
@@ -100,7 +101,7 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>
             if (time < 0.2f)
             {
                 time += Time.deltaTime;
-                var x = Mathf.Sin(time*5 * Mathf.PI)* Mathf.Sin(time * 5 * Mathf.PI) * 50.0f;
+                var x = Mathf.Sin(time * 5 * Mathf.PI) * Mathf.Sin(time * 5 * Mathf.PI) * 50.0f;
                 owner.playerMover.Evade(x);
             }
             else

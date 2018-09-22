@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WitchUserControl : PlayerUserControl<WitchUserControl> {
+public class WitchUserControl : PlayerUserControl<WitchUserControl>
+{
 
     class WeakAttackState : State<WitchUserControl>
     {
-        public WeakAttackState(WitchUserControl owner) : base(owner) { }
+        public WeakAttackState(WitchUserControl owner) : base(owner, PlayerState.WeakAttack) { }
     }
 }

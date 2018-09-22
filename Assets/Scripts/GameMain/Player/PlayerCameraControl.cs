@@ -37,7 +37,7 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
 
     class StateDefault : State<PlayerCameraControl>
     {
-        public StateDefault(PlayerCameraControl owner) : base(owner) { }
+        public StateDefault(PlayerCameraControl owner) : base(owner, CameraState.Default) { }
 
         public override void Enter()
         {
@@ -54,7 +54,7 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
     }
     class StateLockOn : State<PlayerCameraControl>
     {
-        public StateLockOn(PlayerCameraControl owner) : base(owner) { }
+        public StateLockOn(PlayerCameraControl owner) : base(owner, CameraState.LockOn) { }
 
         public override void Execute()
         {
