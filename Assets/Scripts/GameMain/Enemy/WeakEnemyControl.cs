@@ -3,19 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using DG.Tweening;
 
 public enum WeakEnemyState
 {
     Idle,
     Chase,
     Attack,
-    Damage
+    Damage,
+    Death
 }
 
 public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
 {
-    [SerializeField]
-    bool isDamage;
     Transform targetTransform;
 
     protected override WeakEnemyState GetFirstState()
@@ -29,16 +29,17 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
         stateList.Add(new StateChase(this));
         stateList.Add(new StateAttack(this));
         stateList.Add(new StateDamage(this));
+        stateList.Add(new StateDeath(this));
     }
 
-    protected override void Update()
+    protected override void Wince()
     {
-        base.Update();
-        if (isDamage == true)
-        {
-            isDamage = false;
-            ChangeState(WeakEnemyState.Damage);
-        }
+        ChangeState(WeakEnemyState.Damage);
+    }
+
+    protected override void Death()
+    {
+        ChangeState(WeakEnemyState.Death);
     }
 
     class StateIdle : State<WeakEnemyControl>
@@ -117,14 +118,46 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
     class StateDamage : State<WeakEnemyControl>
     {
         public StateDamage(WeakEnemyControl owner) : base(owner, WeakEnemyState.Damage)
-        {}
+        { }
         public override void Enter()
         {
+            owner.enemyWeapon.DeActive();
             owner.animator.SetTrigger("Damage");
             owner.agent.speed = 0.0f;
             owner.agent.angularSpeed = 0;
             owner.animator.SetFloat("Forward", 0);
             Observable.Timer(TimeSpan.FromSeconds(0.833f)).Subscribe(_ => owner.ChangeState(WeakEnemyState.Idle));
+        }
+    }
+
+    class StateDeath : State<WeakEnemyControl>
+    {
+        public StateDeath(WeakEnemyControl owner) : base(owner, WeakEnemyState.Death)
+        {
+        }
+
+        public override void Enter()
+        {
+            owner.animator.SetTrigger("Death");
+            owner.gameObject.tag = "Untagged";
+            InstantiateObjectManager.Instance.RemoveEnemy(owner);
+            foreach (var item in owner.GetComponents<Collider>())
+            {
+                item.enabled = false;
+            }
+            Observable.Timer(TimeSpan.FromSeconds(2.167f)).Subscribe(_ => FadeOut());
+        }
+
+        void FadeOut()
+        {
+            foreach (var renderer in owner.GetComponentsInChildren<Renderer>())
+            {
+                foreach (var mat in renderer.materials)
+                {
+                    mat.DOColor(new Color(1, 1, 1, 0), 1.0f);
+                }
+            }
+            Observable.Timer(TimeSpan.FromSeconds(1.1f)).Subscribe(_ => GameObject.Destroy(owner.gameObject));
         }
     }
 }

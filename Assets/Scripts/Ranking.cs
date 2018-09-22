@@ -7,6 +7,8 @@ public class Ranking {
 
     public List<ScoreData> ScoreRanking;
 
+    public int Score;
+
     private static Ranking instance;
 
     public static Ranking Instance
@@ -14,7 +16,10 @@ public class Ranking {
         get
         {
             if (instance == null)
-                instance = SaveData.GetClass("rankdata", new Ranking());
+            {
+                instance = new Ranking();
+                instance.Load();
+            }
             return instance;
         }
     }

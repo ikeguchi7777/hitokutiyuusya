@@ -13,7 +13,7 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
     protected Animator animator;
     protected EnemyWeapon enemyWeapon;
     protected float defaultAngularSpeed, defaultSpeed;
-    [SerializeField] float Health, Attack, Defence;
+    [SerializeField] float Health, Attack, Defence, WincePoint;
     [SerializeField, Range(0, 1)] float Critical;
 
     public int ID { get; set; }
@@ -40,7 +40,8 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
         defaultAngularSpeed = agent.angularSpeed;
         defaultSpeed = agent.speed;
         AttackFlag = false;
-        InstantiateObjectManager.Instance.EnemyList.Add(this);
+        if (InstantiateObjectManager.Instance)
+            InstantiateObjectManager.Instance.EnemyList.Add(this);
     }
 
     private void LateUpdate()
@@ -60,20 +61,27 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
 
     private void OnDestroy()
     {
-        InstantiateObjectManager.Instance.RemoveEnemy(this);
+        if (InstantiateObjectManager.Instance)
+            InstantiateObjectManager.Instance.RemoveEnemy(this);
     }
 
     void IDamageable.Damage(float atk, float cri)
     {
-        Health -= Mathf.Clamp((Random.value <= cri ? 1.5f : 1) * atk - Defence, 0, float.MaxValue);
+        var damage = Mathf.Clamp((Random.value <= cri ? 1.5f : 1) * atk - Defence, 0, float.MaxValue);
+        Health -= damage;
         if (Health <= 0)
             Death();
+        else if (damage > WincePoint)
+            Wince();
     }
 
     protected virtual void Death()
     {
         Destroy(gameObject);
     }
+
+    //怯み
+    abstract protected void Wince();
 }
 
 public interface LockOnable
