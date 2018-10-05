@@ -50,12 +50,12 @@ public class PlayerMover : MonoBehaviour
         if (isLockon)
         {
             if (LockOn())
-                playerCamera.ChangeState(CameraState.LockOn);
+                playerCamera.ChangeState(CameraState.ToLockOn);
         }
         else
         {
             LockOnObject = null;
-            playerCamera.ChangeState(CameraState.Default);
+            playerCamera.ChangeState(CameraState.FromLockOn);
         }
     }
 

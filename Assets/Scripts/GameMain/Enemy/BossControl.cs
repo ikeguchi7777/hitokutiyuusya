@@ -18,6 +18,11 @@ public class BossControl : EnemyControl<BossControl, BossState>
         stateList.Add(new StateIdle(this));
     }
 
+    protected override void Wince()
+    {
+        
+    }
+
     class StateIdle : State<BossControl>
     {
         public StateIdle(BossControl owner) : base(owner, BossState.Idle)

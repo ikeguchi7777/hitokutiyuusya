@@ -74,7 +74,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             y = 0.500f;
         if ((num == 1 || num == 3) && length != 2)
             x = 0.500f;
-        var width = length < 2 ? 1.000f : 0.500f;
+        var width = length <= 2 ? 1.000f : 0.500f;
         var height = length == 1 ? 1.000f : 0.500f;
         return new Rect(x, y, width, height);
     }

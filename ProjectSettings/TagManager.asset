@@ -8,6 +8,7 @@ TagManager:
   - 2P
   - 3P
   - 4P
+  - Collide
   layers:
   - Default
   - TransparentFX
@@ -18,10 +19,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - EnemyAttack
+  - PlayerAttack
   - 
   - 
   - 
