@@ -50,31 +50,31 @@ public class PlayerInput
         SetButton(EButton.LockOn, "GamePad" + id + "_LockOn");
     }
 
-    float GetAxis(EAxis axis)
+    public float GetAxis(EAxis axis)
     {
         return Input.GetAxis(axislist[(int)axis]);
     }
 
-    float GetAxisRaw(EAxis axis)
+    public float GetAxisRaw(EAxis axis)
     {
         return Input.GetAxisRaw(axislist[(int)axis]);
     }
 
-    bool GetButtonDown(EButton button)
+    public bool GetButtonDown(EButton button)
     {
         return Input.GetButtonDown(buttonlist[(int)button]);
     }
-    bool GetButton(EButton button)
+    public bool GetButton(EButton button)
     {
         return Input.GetButton(buttonlist[(int)button]);
     }
-    bool GetButtonUp(EButton button)
+    public bool GetButtonUp(EButton button)
     {
         return Input.GetButtonUp(buttonlist[(int)button]);
     }
 }
 
-enum EAxis
+public enum EAxis
 {
     X,
     Y,
@@ -82,7 +82,7 @@ enum EAxis
     CamY
 }
 
-enum EButton
+public enum EButton
 {
     Evade,
     WeakAttackAndSubmit,
