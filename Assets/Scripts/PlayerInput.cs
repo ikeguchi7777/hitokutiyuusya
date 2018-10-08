@@ -26,55 +26,55 @@ public class PlayerInput
         new PlayerInput(4)
     };
 
-    void SetAxis(Axis id, string name)
+    void SetAxis(EAxis id, string name)
     {
         axislist.Insert((int)id, name);
     }
 
-    void SetButton(Button id, string name)
+    void SetButton(EButton id, string name)
     {
         buttonlist.Insert((int)id, name);
     }
 
     PlayerInput(int id)
     {
-        SetAxis(Axis.X, "GamePad" + id + "_X");
-        SetAxis(Axis.Y, "GamePad" + id + "_Y");
-        SetAxis(Axis.CamX, "GamePad" + id + "_CamX");
-        SetAxis(Axis.CamY, "GamePad" + id + "_CamY");
-        SetButton(Button.Evade, "GamePad" + id + "_Evade and Cancel");
-        SetButton(Button.WeakAttackAndSubmit, "GamePad" + id + "_WeakAttack and Submit");
-        SetButton(Button.StrongAttack, "GamePad" + id + "_StrongAttack");
-        SetButton(Button.SpecialAttack, "GamePad" + id + "_SpecialAttack");
-        SetButton(Button.Select, "GamePad" + id + "_Select");
-        SetButton(Button.LockOn, "GamePad" + id + "_LockOn");
+        SetAxis(EAxis.X, "GamePad" + id + "_X");
+        SetAxis(EAxis.Y, "GamePad" + id + "_Y");
+        SetAxis(EAxis.CamX, "GamePad" + id + "_CamX");
+        SetAxis(EAxis.CamY, "GamePad" + id + "_CamY");
+        SetButton(EButton.Evade, "GamePad" + id + "_Evade and Cancel");
+        SetButton(EButton.WeakAttackAndSubmit, "GamePad" + id + "_WeakAttack and Submit");
+        SetButton(EButton.StrongAttack, "GamePad" + id + "_StrongAttack");
+        SetButton(EButton.SpecialAttack, "GamePad" + id + "_SpecialAttack");
+        SetButton(EButton.Select, "GamePad" + id + "_Select");
+        SetButton(EButton.LockOn, "GamePad" + id + "_LockOn");
     }
 
-    float GetAxis(Axis axis)
+    float GetAxis(EAxis axis)
     {
         return Input.GetAxis(axislist[(int)axis]);
     }
 
-    float GetAxisRaw(Axis axis)
+    float GetAxisRaw(EAxis axis)
     {
         return Input.GetAxisRaw(axislist[(int)axis]);
     }
 
-    bool GetButtonDown(Button button)
+    bool GetButtonDown(EButton button)
     {
         return Input.GetButtonDown(buttonlist[(int)button]);
     }
-    bool GetButton(Button button)
+    bool GetButton(EButton button)
     {
         return Input.GetButton(buttonlist[(int)button]);
     }
-    bool GetButtonUp(Button button)
+    bool GetButtonUp(EButton button)
     {
         return Input.GetButtonUp(buttonlist[(int)button]);
     }
 }
 
-enum Axis
+enum EAxis
 {
     X,
     Y,
@@ -82,7 +82,7 @@ enum Axis
     CamY
 }
 
-enum Button
+enum EButton
 {
     Evade,
     WeakAttackAndSubmit,
