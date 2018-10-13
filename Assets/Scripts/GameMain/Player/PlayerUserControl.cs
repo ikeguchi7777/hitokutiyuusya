@@ -14,19 +14,23 @@ public enum PlayerState
 public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
     where T : PlayerUserControl<T>
 {
-    PlayerInputKey PlayerKey = new PlayerInputKey(1); //debug
+    int id = 0;
     private PlayerMover playerMover;
     public GameObject LockOnObject { get; private set; }
+    [SerializeField] float strongrecasttime, specialrecasttime;
+    Recast strongRecast, specialRecast;
 
     protected override void Update()
     {
         base.Update();
-        if (Input.GetButtonDown(PlayerKey.LockOn))
+        specialRecast.AddTime(Time.deltaTime);
+        strongRecast.AddTime(Time.deltaTime);
+        if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.LockOn))
         {
             playerMover.SwitchLockOn();
         }
-        var camh = Input.GetAxis(PlayerKey.CamX);
-        var camv = Input.GetAxis(PlayerKey.CamY);
+        var camh = PlayerInput.PlayerInputs[id].GetAxis(EAxis.CamX);
+        var camv = PlayerInput.PlayerInputs[id].GetAxis(EAxis.CamY);
         playerMover.CameraMove(camh, camv);
     }
 
@@ -34,12 +38,14 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamagea
     {
         base.Awake();
         playerMover = GetComponent<PlayerMover>();
+        strongRecast = new Recast(strongrecasttime);
+        specialRecast = new Recast(specialrecasttime);
     }
 
     public void setParams(int id)
     {
-        PlayerKey = new PlayerInputKey(id);
-        playerMover.CameraFlag = 1 << (id - 1);
+        this.id = id;
+        playerMover.CameraFlag = 1 << id;
     }
     protected override PlayerState GetFirstState()
     {
@@ -64,29 +70,31 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamagea
 
         public override void Execute()
         {
-            if (Input.GetButtonDown(owner.PlayerKey.Evade))
+            if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.Evade))
             {
                 owner.ChangeState(PlayerState.Evade);
                 return;
             }
-            else if (Input.GetButtonDown(owner.PlayerKey.WeakAttack))
+            else if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.WeakAttackAndSubmit))
             {
                 owner.ChangeState(PlayerState.WeakAttack);
             }
-            else if (Input.GetButtonDown(owner.PlayerKey.StrongAttack))
+            else if (owner.strongRecast.Useable && PlayerInput.PlayerInputs[id].GetButtonDown(EButton.StrongAttack))
             {
+                owner.strongRecast.Useable = false;
                 owner.ChangeState(PlayerState.StrongAttack);
             }
-            else if (Input.GetButtonDown(owner.PlayerKey.SpecialAttack))
+            else if (owner.specialRecast.Useable && PlayerInput.PlayerInputs[id].GetButtonDown(EButton.SpecialAttack))
             {
+                owner.specialRecast.Useable = false;
                 owner.ChangeState(PlayerState.SpecialAttack);
             }
         }
 
         public override void FixedExecute()
         {
-            var h = Input.GetAxis(owner.PlayerKey.X);
-            var v = Input.GetAxis(owner.PlayerKey.Y);
+            var h = PlayerInput.PlayerInputs[id].GetAxis(EAxis.X);
+            var v = PlayerInput.PlayerInputs[id].GetAxis(EAxis.Y);
             owner.playerMover.Move(h, v);
         }
     }
@@ -114,31 +122,35 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamagea
         }
     }
     #endregion
-    class PlayerInputKey
-    {
-        public PlayerInputKey(int id)
-        {
-            X = "GamePad" + id + "_X";
-            Y = "GamePad" + id + "_Y";
-            CamX = "GamePad" + id + "_CamX";
-            CamY = "GamePad" + id + "_CamY";
-            Evade = "GamePad" + id + "_Evade and Cancel";
-            WeakAttack = "GamePad" + id + "_WeakAttack and Submit";
-            StrongAttack = "GamePad" + id + "_StrongAttack";
-            SpecialAttack = "GamePad" + id + "_SpecialAttack";
-            Select = "GamePad" + id + "_Select";
-            LockOn = "GamePad" + id + "_LockOn";
-        }
 
-        public string X { get; private set; }
-        public string Y { get; private set; }
-        public string CamX { get; private set; }
-        public string CamY { get; private set; }
-        public string Evade { get; private set; }
-        public string WeakAttack { get; private set; }
-        public string StrongAttack { get; private set; }
-        public string SpecialAttack { get; private set; }
-        public string Select { get; private set; }
-        public string LockOn { get; private set; }
+    class Recast
+    {
+        float time,recast;
+        bool useable;
+        public bool Useable
+        {
+            get
+            {
+                return useable;
+            }
+            set
+            {
+                useable = value;
+                time = 0.0f;
+            }
+        }
+        public Recast(float recastTime)
+        {
+            recast = recastTime;
+        }
+        
+        public void AddTime(float value)
+        {
+            if (useable)
+                return;
+            time += value;
+            if (time > recast)
+                useable = true;
+        }
     }
 }

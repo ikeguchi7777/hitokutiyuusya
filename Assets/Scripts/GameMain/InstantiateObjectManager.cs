@@ -33,7 +33,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
         }
         for (int i = 0; i < 4; i++)
         {
-            InstantiatePlayer(i + 1, PlayerID.Instance.PlayerTypes[i]);
+            InstantiatePlayer(i, PlayerID.Instance.PlayerTypes[i]);
         }
         EnemyList = new List<LockOnable>();
         InstantiateEnemy();
@@ -49,7 +49,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             case PlayerType.Swordswoman:
                 break;
             case PlayerType.Witch:
-                spawnobj = Instantiate(spawnObjects[(int)type - 1], spawnPos[id - 1].position, spawnPos[id - 1].rotation);
+                spawnobj = Instantiate(spawnObjects[(int)type - 1], spawnPos[id].position, spawnPos[id].rotation);
                 spawnobj.GetComponent<WitchUserControl>().setParams(id);
                 break;
             case PlayerType.Healer:
@@ -57,12 +57,12 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
         }
         if (spawnobj != null)
         {
-            var camera = Instantiate(Camera).GetComponent<Camera>();
-            camera.tag = id + "P";
+            var camera = Instantiate(Camera,spawnobj.transform).GetComponent<Camera>();
+            camera.tag = (id + 1) + "P";
             camera.rect = SetCam(counter, playernum);
             counter++;
             playerList.Add(spawnobj.GetComponent<PlayerMover>());
-            playerList[id - 1].setCamera(camera.GetComponent<PlayerCameraControl>(), -90.0f * (id - 1));
+            playerList[id].setCamera(camera.GetComponent<PlayerCameraControl>(), -90.0f * id);
         }
     }
 

@@ -180,9 +180,4 @@ public class PlayerMover : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         ikLookAt = GetComponent<IKLookAt>();
     }
-    private void OnDestroy()
-    {
-        if (playerCamera)
-            Destroy(playerCamera.gameObject);
-    }
 }
