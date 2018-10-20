@@ -11,9 +11,10 @@ public enum PlayerState
     SpecialAttack
 }
 
-public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
+public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
     where T : PlayerUserControl<T>
 {
+    static int _id = 0;
     int id = 0;
     private PlayerMover playerMover;
     public GameObject LockOnObject { get; private set; }
@@ -40,11 +41,13 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamagea
         playerMover = GetComponent<PlayerMover>();
         strongRecast = new Recast(strongrecasttime);
         specialRecast = new Recast(specialrecasttime);
+        setParams();
     }
 
-    public void setParams(int id)
+    public void setParams()
     {
-        this.id = id;
+        id = _id;
+        _id++;
         playerMover.CameraFlag = 1 << id;
     }
     protected override PlayerState GetFirstState()
@@ -62,6 +65,14 @@ public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamagea
     {
 
     }
+
+    protected void Attack(PlayerState type)
+    {
+        playerMover.Attack((int)type - (int)PlayerState.WeakAttack);
+    }
+
+    protected abstract void AttackStart();
+    protected abstract void AttackEnd();
 
     #region State
     protected class StateMoveable : State<T>

@@ -41,23 +41,12 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
 
     void InstantiatePlayer(int id, PlayerType type)
     {
-        GameObject spawnobj = null;
-        switch (type)
-        {
-            case PlayerType.None:
-                break;
-            case PlayerType.Swordswoman:
-                break;
-            case PlayerType.Witch:
-                spawnobj = Instantiate(spawnObjects[(int)type - 1], spawnPos[id].position, spawnPos[id].rotation);
-                spawnobj.GetComponent<WitchUserControl>().setParams(id);
-                break;
-            case PlayerType.Healer:
-                break;
-        }
+        if (type == PlayerType.None)
+            return;
+        GameObject spawnobj = Instantiate(spawnObjects[(int)type - 1], spawnPos[id].position, spawnPos[id].rotation);
         if (spawnobj != null)
         {
-            var camera = Instantiate(Camera,spawnobj.transform).GetComponent<Camera>();
+            var camera = Instantiate(Camera, spawnobj.transform).GetComponent<Camera>();
             camera.tag = (id + 1) + "P";
             camera.rect = SetCam(counter, playernum);
             counter++;
