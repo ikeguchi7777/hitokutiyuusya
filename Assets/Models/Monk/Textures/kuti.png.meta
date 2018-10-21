@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/Monk/Textures/kuti.png.meta
 guid: b2e33e64d5bab9d45b8a5e2062c4109e
+=======
+guid: f44d8135d81adad498835e44d080311c
+>>>>>>> PlayerModel:Assets/Models/Monk/Textures/kuti.png.meta
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
