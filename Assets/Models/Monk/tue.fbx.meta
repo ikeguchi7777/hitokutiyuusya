@@ -22,12 +22,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: mahouseki
-    second: {instanceID: 0}
+    second: {fileID: 2100000, guid: 7f17e0951ee2982499caf0c9e7e6bab7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: tue
-    second: {instanceID: 0}
+    second: {fileID: 2100002, guid: bb5bb2d780b37ce489b0b55180032a74, type: 3}
   materials:
     importMaterials: 1
     materialName: 0

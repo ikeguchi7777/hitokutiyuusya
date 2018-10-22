@@ -118,10 +118,11 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         public override void Enter()
         {
             time = 0.0f;
+            owner.playerMover.Evade();
         }
 
         public override void Execute()
-        {
+        {/*
             if (time < 0.2f)
             {
                 time += Time.deltaTime;
@@ -129,7 +130,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
                 owner.playerMover.Evade(x);
             }
             else
-                owner.ChangeState(PlayerState.Moveable);
+                owner.ChangeState(PlayerState.Moveable);*/
         }
     }
     #endregion

@@ -17,7 +17,17 @@ ModelImporter:
     3300002: Torus
     4300000: Cube.003
     4300002: Torus
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mahouseki
+    second: {fileID: 2100000, guid: 7f17e0951ee2982499caf0c9e7e6bab7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tue
+    second: {fileID: 2100000, guid: 5a22f770e818ee543a6f924ded493b35, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

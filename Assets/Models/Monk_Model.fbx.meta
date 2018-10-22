@@ -265,7 +265,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: matuge
-    second: {fileID: 2100000, guid: d64848bffb08b1a4f9c597c7a3ccfc8f, type: 2}
+    second: {fileID: 2100000, guid: b762f03db82148d40bd117c51388edad, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -348,7 +348,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
