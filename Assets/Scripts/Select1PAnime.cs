@@ -6,7 +6,7 @@ public class Select1PAnime : MonoBehaviour {
 
 
     private int state;
-    private bool ready;
+    public static  bool ready;
     public Animator Select1P,Kenshi1P,Mahou1P,Souryo1P;
     
     public Text textA,textB;
