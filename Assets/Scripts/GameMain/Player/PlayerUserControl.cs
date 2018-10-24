@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum PlayerState
 {
+    Wait,
     Moveable,
     Evade,
     WeakAttack,
@@ -52,11 +54,12 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
     }
     protected override PlayerState GetFirstState()
     {
-        return PlayerState.Moveable;
+        return PlayerState.Wait;
     }
 
     protected override void StateListInit()
     {
+        stateList.Add(new StateWait(this as T));
         stateList.Add(new StateMoveable(this as T));
         stateList.Add(new StateEvade(this as T));
     }
@@ -75,6 +78,13 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
     protected abstract void AttackEnd();
 
     #region State
+    private class StateWait : State<T>
+    {
+        public StateWait(T owner) : base(owner, PlayerState.Wait)
+        {
+        }
+    }
+
     protected class StateMoveable : State<T>
     {
         public StateMoveable(T owner) : base(owner, PlayerState.Moveable) { }

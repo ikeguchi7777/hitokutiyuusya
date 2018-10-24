@@ -9,6 +9,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
     [SerializeField] private GameObject[] spawnObjects;
     [SerializeField] private GameObject Camera;
     [SerializeField] private GameObject Enemy;
+    [SerializeField] private BossControl boss;
     int playernum, counter;
     public List<LockOnable> EnemyList { get; set; }
     private List<PlayerMover> playerList = new List<PlayerMover>();
@@ -37,6 +38,16 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
         }
         EnemyList = new List<LockOnable>();
         InstantiateEnemy();
+    }
+
+    public void MoveCharactor()
+    {
+        foreach (var player in playerList)
+        {
+            player.gameObject.SendMessage("ChangeState", PlayerState.Moveable);
+        }
+
+        boss.gameObject.SendMessage("ChangeState", BossState.Idle);
     }
 
     void InstantiatePlayer(int id, PlayerType type)

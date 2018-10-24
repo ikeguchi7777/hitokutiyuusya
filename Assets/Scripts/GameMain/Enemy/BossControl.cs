@@ -1,16 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum BossState
 {
+    Wait,
     Idle
 }
 public class BossControl : EnemyControl<BossControl, BossState>
 {
     protected override BossState GetFirstState()
     {
-        return BossState.Idle;
+        return BossState.Wait;
     }
 
     protected override void StateListInit()
@@ -21,6 +23,13 @@ public class BossControl : EnemyControl<BossControl, BossState>
     protected override void Wince()
     {
         
+    }
+
+    class StateWait : State<BossControl>
+    {
+        public StateWait(BossControl owner) : base(owner, BossState.Wait)
+        {
+        }
     }
 
     class StateIdle : State<BossControl>
