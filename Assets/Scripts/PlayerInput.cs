@@ -72,6 +72,16 @@ public class PlayerInput
     {
         return Input.GetButtonUp(buttonlist[(int)button]);
     }
+
+    public string GetButtonName(EButton button)
+    {
+        return buttonlist[(int)button];
+    }
+
+    public string GetAxisName(EAxis axis)
+    {
+        return axislist[(int)axis];
+    }
 }
 
 public enum EAxis
