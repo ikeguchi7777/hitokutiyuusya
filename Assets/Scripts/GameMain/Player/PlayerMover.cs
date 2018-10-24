@@ -16,7 +16,6 @@ public class PlayerMover : MonoBehaviour
 
     private Animator m_Animator;
     private IKLookAt ikLookAt;
-    private SkinnedMeshRenderer skinnedMesh;
     private CharacterController characterController;
     private float speed;
     private float pastTime = 0.0f;
@@ -184,7 +183,6 @@ public class PlayerMover : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         ikLookAt = GetComponent<IKLookAt>();
-        skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>();
         ikLookAt.enabled = false;
     }
 
@@ -192,35 +190,6 @@ public class PlayerMover : MonoBehaviour
     {
         m_Animator.SetInteger("AttackType", type);
         m_Animator.SetTrigger("Attack");
-    }
-
-    private void Start()
-    {
-        StartCoroutine(Blink());
-    }
-
-    IEnumerator Blink()
-    {
-        while (true)
-        {
-            float time = 0;
-            yield return null;
-            while (time <= 1.0f)
-            {
-                time += Time.deltaTime*10;
-                skinnedMesh.SetBlendShapeWeight(0, Mathf.Lerp(0, 100, time));
-                yield return null;
-            }
-            time = 0;
-            yield return null;
-            while (time <= 1.0f)
-            {
-                time += Time.deltaTime*10;
-                skinnedMesh.SetBlendShapeWeight(0, Mathf.Lerp(100, 0, time));
-                yield return null;
-            }
-            yield return new WaitForSeconds(3);
-        }
     }
 
     public void ResetFlags()
