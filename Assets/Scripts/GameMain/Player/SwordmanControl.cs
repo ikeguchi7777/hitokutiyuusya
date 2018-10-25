@@ -29,6 +29,12 @@ public class SwordmanControl : PlayerUserControl<SwordmanControl> {
         {
             owner.Attack(PlayerState.WeakAttack);
         }
+
+        public override void Execute()
+        {
+            if (PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.WeakAttackAndSubmit))
+                owner.Attack(PlayerState.WeakAttack);
+        }
     }
     class StateStrongAttack : State<SwordmanControl>
     {
