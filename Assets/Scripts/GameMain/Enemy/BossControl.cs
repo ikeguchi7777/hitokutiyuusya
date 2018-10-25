@@ -6,7 +6,12 @@ using UnityEngine;
 public enum BossState
 {
     Wait,
-    Idle
+    Idle,
+    CallEnemy,
+    Breath,
+    WeakAttack,
+    StrongAttack,
+    SpecialAttack
 }
 public class BossControl : EnemyControl<BossControl, BossState>
 {
@@ -17,6 +22,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
     protected override void StateListInit()
     {
+        stateList.Add(new StateWait(this));
         stateList.Add(new StateIdle(this));
     }
 
