@@ -17,7 +17,7 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
 
     public Transform player { set; private get; }
     public Transform LockOnTransform { set; private get; }
-    [SerializeField] private float _pitch,pmax,pmin;
+    [SerializeField] private float _pitch = 20.0f, pmax = 70.0f, pmin = 0.0f;
     public float Pitch {
         get { return _pitch; }
         set
