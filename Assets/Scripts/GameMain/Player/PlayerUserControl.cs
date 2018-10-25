@@ -17,7 +17,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
     where T : PlayerUserControl<T>
 {
     static int _id = 0;
-    int id = 0;
+    protected int id;
     private PlayerMover playerMover;
     public GameObject LockOnObject { get; private set; }
     [SerializeField] float strongrecasttime, specialrecasttime;
@@ -51,10 +51,11 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         id = _id;
         _id++;
         playerMover.CameraFlag = 1 << id;
+        Debug.Log(id);
     }
     protected override PlayerState GetFirstState()
     {
-        return PlayerState.Wait;
+        return PlayerState.Moveable;
     }
 
     protected override void StateListInit()
@@ -91,21 +92,21 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
         public override void Execute()
         {
-            if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.Evade))
+            if (PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.Evade))
             {
                 owner.ChangeState(PlayerState.Evade);
                 return;
             }
-            else if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.WeakAttackAndSubmit))
+            else if (PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.WeakAttackAndSubmit))
             {
                 owner.ChangeState(PlayerState.WeakAttack);
             }
-            else if (owner.strongRecast.Useable && PlayerInput.PlayerInputs[id].GetButtonDown(EButton.StrongAttack))
+            else if (owner.strongRecast.Useable && PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.StrongAttack))
             {
                 owner.strongRecast.Useable = false;
                 owner.ChangeState(PlayerState.StrongAttack);
             }
-            else if (owner.specialRecast.Useable && PlayerInput.PlayerInputs[id].GetButtonDown(EButton.SpecialAttack))
+            else if (owner.specialRecast.Useable && PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.SpecialAttack))
             {
                 owner.specialRecast.Useable = false;
                 owner.ChangeState(PlayerState.SpecialAttack);
@@ -114,8 +115,8 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
         public override void FixedExecute()
         {
-            var h = PlayerInput.PlayerInputs[id].GetAxis(EAxis.X);
-            var v = PlayerInput.PlayerInputs[id].GetAxis(EAxis.Y);
+            var h = PlayerInput.PlayerInputs[owner.id].GetAxis(EAxis.X);
+            var v = PlayerInput.PlayerInputs[owner.id].GetAxis(EAxis.Y);
             owner.playerMover.Move(h, v);
         }
     }
