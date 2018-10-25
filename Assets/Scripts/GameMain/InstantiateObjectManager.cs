@@ -10,6 +10,8 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
     [SerializeField] private GameObject Camera;
     [SerializeField] private GameObject Enemy;
     [SerializeField] private BossControl boss;
+
+    List<MonoBehaviour> pauseScripts = new List<MonoBehaviour>();
     int playernum, counter;
     public List<LockOnable> EnemyList { get; set; }
     private List<PlayerMover> playerList = new List<PlayerMover>();
@@ -94,5 +96,29 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
                 player.LockOn();
             }
         }
+    }
+
+    public void Pause()
+    {
+        foreach (var player in playerList)
+        {
+            foreach (var script in player.GetComponents<MonoBehaviour>())
+            {
+                if (script.enabled)
+                {
+                    pauseScripts.Add(script);
+                    script.enabled = false;
+                }
+            }
+        }
+    }
+
+    public void Resume()
+    {
+        foreach (var script in pauseScripts)
+        {
+            script.enabled = true;
+        }
+        pauseScripts.Clear();
     }
 }

@@ -18,6 +18,7 @@ public class PauseControl : MonoBehaviour {
     public void Pause(int i)
     {
         Time.timeScale = 0.0f;
+        InstantiateObjectManager.Instance.Pause();
         SetButton(i);
         pausePanel.SetActive(true);
         eventSystem.SetSelectedGameObject(firstSelected);
@@ -25,13 +26,8 @@ public class PauseControl : MonoBehaviour {
 
     public void Resume()
     {
-        StartCoroutine(Wait());
-    }
-
-    IEnumerator Wait()
-    {
         pausePanel.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
+        InstantiateObjectManager.Instance.Resume();
         Time.timeScale = 1.0f;
         gameObject.SendMessage("ChangeState", GameState.Playing);
     }

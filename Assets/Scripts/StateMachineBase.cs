@@ -39,6 +39,7 @@ public class StateMachine<T>
     public StateMachine(State<T> firstState)
     {
         CurrentState = firstState;
+        CurrentState.Enter();
     }
 
     public State<T> CurrentState { get; private set; }

@@ -8,9 +8,10 @@ public enum GameState
     CountDown,
     Playing,
 }
-public class GameControl : StatefulObjectBase<GameControl,GameState> {
+public class GameControl : StatefulObjectBase<GameControl, GameState>
+{
     [SerializeField] Animation countdown;
-    [SerializeField] float timeLimit;
+    [SerializeField] float timeLimit = 300.0f;
 
     PauseControl pauseControl;
 
@@ -22,12 +23,13 @@ public class GameControl : StatefulObjectBase<GameControl,GameState> {
 
     protected override GameState GetFirstState()
     {
-        throw new System.NotImplementedException();
+        return GameState.CountDown;
     }
 
     protected override void StateListInit()
     {
-        throw new System.NotImplementedException();
+        stateList.Add(new StateCountDown(this));
+        stateList.Add(new StatePlaying(this));
     }
 
     class StateCountDown : State<GameControl>
@@ -77,7 +79,7 @@ public class GameControl : StatefulObjectBase<GameControl,GameState> {
                 }
             }
             time += Time.deltaTime;
-            if (time>=owner.timeLimit)
+            if (time >= owner.timeLimit)
             {
                 Debug.Log("時間切れ");
             }
