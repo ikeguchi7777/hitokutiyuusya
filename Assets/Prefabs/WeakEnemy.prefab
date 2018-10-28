@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 137107072001330252}
   - component: {fileID: 65570950056634972}
   - component: {fileID: 114886653942550958}
+  - component: {fileID: 114409484559797466}
   m_Layer: 11
   m_Name: Object01
   m_TagString: Untagged
@@ -437,6 +438,36 @@ GameObject:
   - component: {fileID: 4429471027700108}
   m_Layer: 9
   m_Name: Bip001 L Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1586513462881928
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4757928884945714}
+  m_Layer: 11
+  m_Name: tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1633022721885316
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4440704774508666}
+  m_Layer: 11
+  m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -951,6 +982,20 @@ Transform:
   m_Father: {fileID: 4976641612391198}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4440704774508666
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633022721885316}
+  m_LocalRotation: {x: 0.00000007450579, y: -0.00000007450579, z: -0.00000014901158,
+    w: 1}
+  m_LocalPosition: {x: 0, y: -0.011600011, z: -0.0013999911}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4488564129181996}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4456377804575032
 Transform:
   m_ObjectHideFlags: 1
@@ -1002,7 +1047,9 @@ Transform:
   m_LocalRotation: {x: -0.49207816, y: 0.49207905, z: -0.5077974, w: 0.5077984}
   m_LocalPosition: {x: 0.0003128502, y: 0.000021948548, z: 0.0016909624}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4757928884945714}
+  - {fileID: 4440704774508666}
   m_Father: {fileID: 4456377804575032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1144,6 +1191,20 @@ Transform:
   m_Father: {fileID: 4039481752687232}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4757928884945714
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1586513462881928}
+  m_LocalRotation: {x: 0.00000007450579, y: -0.00000007450579, z: -0.00000014901158,
+    w: 1}
+  m_LocalPosition: {x: 0, y: -0.09400008, z: 0.016100034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4488564129181996}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4824829399776772
 Transform:
   m_ObjectHideFlags: 1
@@ -1266,8 +1327,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0030000003, y: 0.08548723, z: 0.015632998}
-  m_Center: {x: -0.00000006603077, y: -0.052834228, z: 0.0016581153}
+  m_Size: {x: 0.010000001, y: 0.09981152, z: 0.03}
+  m_Center: {x: 0.00000028797228, y: -0.055127338, z: 0.0016581275}
 --- !u!95 &95880321335866818
 Animator:
   serializedVersion: 3
@@ -1302,6 +1363,30 @@ MonoBehaviour:
   Defence: 2
   WincePoint: 0
   Critical: 0.2
+--- !u!114 &114409484559797466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1097742740946084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ceb339997c8304e9354d4ce5ddc9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emit: 0
+  _emitTime: 0
+  _material: {fileID: 2100000, guid: 5f402d1520e5fa74fa21e08f85b71370, type: 2}
+  _lifeTime: 0.3
+  _colors: []
+  _sizes: []
+  _minVertexDistance: 0.1
+  _maxVertexDistance: 10
+  _maxAngle: 3
+  _autoDestruct: 0
+  subdivisions: 4
+  _base: {fileID: 4440704774508666}
+  _tip: {fileID: 4757928884945714}
 --- !u!114 &114416084960204362
 MonoBehaviour:
   m_ObjectHideFlags: 1

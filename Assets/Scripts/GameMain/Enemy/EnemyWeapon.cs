@@ -6,11 +6,13 @@ using UnityEngine.EventSystems;
 public class EnemyWeapon : MonoBehaviour
 {
     Collider[] weaponCollider;
+    MeleeWeaponTrail trail;
     float attack, critical;
 
     private void Awake()
     {
         weaponCollider = GetComponents<Collider>();
+        trail = GetComponent<MeleeWeaponTrail>();
         DeActive();
     }
 
@@ -20,6 +22,7 @@ public class EnemyWeapon : MonoBehaviour
         {
             col.enabled = false;
         }
+        trail.Emit = false;
     }
 
     public void Activate(float atk, float cri)
@@ -28,6 +31,7 @@ public class EnemyWeapon : MonoBehaviour
         {
             col.enabled = true;
         }
+        trail.Emit = true;
         attack = atk;
         critical = cri;
     }
