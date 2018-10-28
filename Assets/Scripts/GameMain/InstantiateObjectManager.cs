@@ -14,11 +14,12 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
     List<MonoBehaviour> pauseScripts = new List<MonoBehaviour>();
     int playernum, counter;
     public List<LockOnable> EnemyList { get; set; }
-    private List<PlayerMover> playerList = new List<PlayerMover>();
+    public List<PlayerMover> PlayerList { get; set; }
 
     protected override void Awake()
     {
         base.Awake();
+        PlayerList = new List<PlayerMover>();
         if (isDebug)
         {
             PlayerID.Instance.Init();
@@ -44,7 +45,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
 
     public void MoveCharactor()
     {
-        foreach (var player in playerList)
+        foreach (var player in PlayerList)
         {
             player.gameObject.SendMessage("ChangeState", PlayerState.Moveable);
         }
@@ -63,8 +64,8 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             camera.tag = (id + 1) + "P";
             camera.rect = SetCam(counter, playernum);
             counter++;
-            playerList.Add(spawnobj.GetComponent<PlayerMover>());
-            playerList[id].setCamera(camera.GetComponent<PlayerCameraControl>(), -90.0f * id);
+            PlayerList.Add(spawnobj.GetComponent<PlayerMover>());
+            PlayerList[id].setCamera(camera.GetComponent<PlayerCameraControl>(), -90.0f * id);
         }
     }
 
@@ -89,7 +90,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
     public void RemoveEnemy(LockOnable enemy)
     {
         EnemyList.Remove(enemy);
-        foreach (var player in playerList)
+        foreach (var player in PlayerList)
         {
             if (player.LockOnObject == enemy.TargetTransform)
             {
@@ -100,7 +101,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
 
     public void Pause()
     {
-        foreach (var player in playerList)
+        foreach (var player in PlayerList)
         {
             foreach (var script in player.GetComponents<MonoBehaviour>())
             {
