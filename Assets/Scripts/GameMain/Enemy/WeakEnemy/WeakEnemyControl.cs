@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public enum WeakEnemyState
 {
+    Wait,
     Idle,
     Chase,
     Attack,
@@ -18,13 +19,19 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
 {
     Transform targetTransform;
 
+    public void Pawn()
+    {
+        animator.SetBool("Pawned", true);
+    }
+
     protected override WeakEnemyState GetFirstState()
     {
-        return WeakEnemyState.Idle;
+        return WeakEnemyState.Wait;
     }
 
     protected override void StateListInit()
     {
+        stateList.Add(new StateWait(this));
         stateList.Add(new StateIdle(this));
         stateList.Add(new StateChase(this));
         stateList.Add(new StateAttack(this));
@@ -42,6 +49,13 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
         ChangeState(WeakEnemyState.Death);
     }
 
+    class StateWait : State<WeakEnemyControl>
+    {
+        public StateWait(WeakEnemyControl owner) : base(owner, WeakEnemyState.Wait)
+        {
+        }
+    }
+
     class StateIdle : State<WeakEnemyControl>
     {
         public StateIdle(WeakEnemyControl owner) : base(owner, WeakEnemyState.Idle)
@@ -51,7 +65,10 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
         {
             if (owner.AttackFlag == true)
                 return;
-            var obj = GameObject.FindGameObjectWithTag("Player");
+            var size = InstantiateObjectManager.Instance.PlayerList.Count;
+            if (size == 0)
+                return;
+            var obj = InstantiateObjectManager.Instance.PlayerList[UnityEngine.Random.Range(0, size - 1)];
             if (obj)
             {
                 owner.targetTransform = obj.transform;
