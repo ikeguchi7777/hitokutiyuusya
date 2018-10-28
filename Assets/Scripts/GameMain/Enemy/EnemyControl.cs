@@ -13,6 +13,7 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
     protected Animator animator;
     protected EnemyWeapon enemyWeapon;
     protected float defaultAngularSpeed, defaultSpeed;
+    
     [SerializeField] float Health, Attack, Defence, WincePoint;
     [SerializeField, Range(0, 1)] float Critical;
 
