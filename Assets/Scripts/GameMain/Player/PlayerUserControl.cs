@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum PlayerState
 {
@@ -10,7 +11,8 @@ public enum PlayerState
     Evade,
     WeakAttack,
     StrongAttack,
-    SpecialAttack
+    SpecialAttack,
+    Death
 }
 
 public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
@@ -18,8 +20,10 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 {
     static int _id = 0;
     protected int id;
+    bool isDamage = false;
     private PlayerMover playerMover;
     public GameObject LockOnObject { get; private set; }
+    [SerializeField] float Health = 100, Defence = 3, WincePoint = 1;
     [SerializeField] float strongrecasttime, specialrecasttime;
     Recast strongRecast, specialRecast;
 
@@ -63,11 +67,33 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         stateList.Add(new StateWait(this as T));
         stateList.Add(new StateMoveable(this as T));
         stateList.Add(new StateEvade(this as T));
+        stateList.Add(new StateDeath(this as T));
+    }
+
+    IEnumerator Damage()
+    {
+        isDamage = true;
+        playerMover.Damage();
+        yield return new WaitForSeconds(0.5f);
+        isDamage = false;
+        /*float time = 0.0f;
+        yield return null;
+        while(time<0.5f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }*/
     }
 
     public void Damage(float atk, float cri)
     {
-
+        var damage = Mathf.Clamp((Random.value <= cri ? 0 : -Defence) + atk, 0, float.MaxValue);
+        Debug.Log(damage);
+        Health -= damage;
+        if (Health <= 0)
+            ChangeState(PlayerState.Death);
+        else if (damage > WincePoint)
+            StartCoroutine(Damage());
     }
 
     protected void Attack(PlayerState type)
@@ -92,6 +118,8 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
         public override void Execute()
         {
+            if (owner.isDamage)
+                return;
             if (PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.Evade))
             {
                 owner.ChangeState(PlayerState.Evade);
@@ -115,6 +143,8 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
         public override void FixedExecute()
         {
+            if (owner.isDamage)
+                return;
             var h = PlayerInput.PlayerInputs[owner.id].GetAxis(EAxis.X);
             var v = PlayerInput.PlayerInputs[owner.id].GetAxis(EAxis.Y);
             owner.playerMover.Move(h, v);
@@ -144,11 +174,27 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
                 owner.ChangeState(PlayerState.Moveable);*/
         }
     }
+
+    protected class StateDeath : State<T>
+    {
+        public StateDeath(T owner) : base(owner, PlayerState.Death)
+        {
+        }
+
+        public override void Enter()
+        {
+            owner.GetComponent<Rigidbody>().useGravity = false;
+            owner.GetComponent<Collider>().enabled = false;
+            InstantiateObjectManager.Instance.PlayerList.Remove(owner.playerMover);
+            owner.playerMover.Death();
+        }
+    }
+
     #endregion
 
     class Recast
     {
-        float time,recast;
+        float time, recast;
         bool useable;
         public bool Useable
         {
@@ -166,7 +212,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         {
             recast = recastTime;
         }
-        
+
         public void AddTime(float value)
         {
             if (useable)

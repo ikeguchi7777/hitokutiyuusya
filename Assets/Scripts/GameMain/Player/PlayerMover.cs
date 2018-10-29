@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(IKLookAt))]
 public class PlayerMover : MonoBehaviour
 {
@@ -16,7 +15,6 @@ public class PlayerMover : MonoBehaviour
 
     private Animator m_Animator;
     private IKLookAt ikLookAt;
-    private CharacterController characterController;
     private float speed;
     private float pastTime = 0.0f;
     private Vector3 camForward;
@@ -149,6 +147,16 @@ public class PlayerMover : MonoBehaviour
         characterController.Move(direction * x * Time.deltaTime);*/
     }
 
+    public void Death()
+    {
+        m_Animator.SetTrigger("Death");
+    }
+
+    public void Damage()
+    {
+        m_Animator.SetTrigger("Damage");
+    }
+
     public void setCamera(PlayerCameraControl cam, float y)
     {
         playerCamera = cam;
@@ -171,17 +179,16 @@ public class PlayerMover : MonoBehaviour
     }
     private void OnAnimatorMove()
     {
-        var v = m_Animator.deltaPosition * speed;
-        if (!characterController.isGrounded)
+        transform.position+= m_Animator.deltaPosition * speed;
+        /*if (!characterController.isGrounded)
             v += Vector3.down * 9.8f;
-        characterController.Move(v);
+        characterController.Move(v);*/
         transform.rotation = m_Animator.rootRotation;
     }
 
     void Awake()
     {
         m_Animator = GetComponent<Animator>();
-        characterController = GetComponent<CharacterController>();
         ikLookAt = GetComponent<IKLookAt>();
         ikLookAt.enabled = false;
     }

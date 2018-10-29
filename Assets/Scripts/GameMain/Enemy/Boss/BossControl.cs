@@ -125,7 +125,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
         public override void Enter()
         {
             var val = Random.value;
-            owner.agent.stoppingDistance = 1.4f;
+            owner.agent.stoppingDistance = 2.0f;
             owner.agent.SetDestination(owner.target.position);
             if (val < 0.33f)
                 owner.attack = BossAttackState.Punch_R;

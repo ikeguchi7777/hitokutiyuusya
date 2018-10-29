@@ -526,7 +526,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 45
   m_StoppingDistance: 5
@@ -1347,6 +1347,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: -0.2, y: 0, z: 0}
+--- !u!114 &1445930000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1445929997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15a96da8721e7a44a34c3ebd11c80a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 10
+  critical: 0.1
 --- !u!1 &1494173554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,6 +1810,10 @@ Prefab:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: d8c41be67f41aa545ae053b0b927f821, type: 2}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: d8c41be67f41aa545ae053b0b927f821, type: 2}
     - {fileID: 13500000, guid: d8c41be67f41aa545ae053b0b927f821, type: 2}
@@ -1819,6 +1836,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: -0.2, y: 0, z: 0}
+--- !u!114 &1592420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1592420031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15a96da8721e7a44a34c3ebd11c80a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 10
+  critical: 0.1
 --- !u!1 &1682133084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,7 +1872,7 @@ TerrainCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1682133084}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3aeb7dadc0c69d54d9e5777e9d5631f1, type: 2}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: f537ba34c795a6c48be920fa246acdfa, type: 2}
   m_EnableTreeColliders: 1
@@ -1891,6 +1921,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1694968154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: d8c41be67f41aa545ae053b0b927f821,
+    type: 2}
+  m_PrefabInternal: {fileID: 1498302019}
+--- !u!114 &1694968157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694968154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15a96da8721e7a44a34c3ebd11c80a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 0.5
+  critical: 1
 --- !u!198 &1903993146 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19800000, guid: d8c41be67f41aa545ae053b0b927f821,
@@ -2177,3 +2225,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.2941556
   m_Center: {x: 1.2950574, y: -0.00000000229058, z: 0.2941556}
+--- !u!114 &2123628987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2123628984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15a96da8721e7a44a34c3ebd11c80a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 20
+  critical: 0.2

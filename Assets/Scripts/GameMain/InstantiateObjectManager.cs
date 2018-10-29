@@ -40,7 +40,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             InstantiatePlayer(i, PlayerID.Instance.PlayerTypes[i]);
         }
         EnemyList = new List<LockOnable>();
-        InstantiateEnemy();
+        //InstantiateEnemy();
     }
 
     public void MoveCharactor()
