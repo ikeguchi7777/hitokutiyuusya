@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerInput
 {
-    string[] axis;
+    bool isActive;
+    float time = 0.0f;
+    const float interval = 0.3f;
     List<string> axislist = new List<string>();
     List<string> buttonlist = new List<string>();
     string X;
@@ -48,11 +50,26 @@ public class PlayerInput
         SetButton(EButton.SpecialAttack, "GamePad" + id + "_SpecialAttack");
         SetButton(EButton.Select, "GamePad" + id + "_Select");
         SetButton(EButton.LockOn, "GamePad" + id + "_LockOn");
+        isActive = true;
     }
 
     public float GetAxis(EAxis axis)
     {
         return Input.GetAxis(axislist[(int)axis]);
+    }
+
+    public int GetAxisPulse(EAxis axis)
+    {
+        float t = 0;
+        if (isActive && Mathf.Abs(t = GetAxisRaw(axis)) >= 1.0f)
+        {
+            isActive = false;
+            time = Time.time;
+            return (t > 0.0f) ? 1 : -1;
+        }
+        else if (Time.time - interval > time)
+            isActive = true;
+        return 0;
     }
 
     public float GetAxisRaw(EAxis axis)
