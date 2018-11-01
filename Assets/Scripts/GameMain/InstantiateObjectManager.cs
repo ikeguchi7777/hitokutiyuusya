@@ -9,7 +9,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
     [SerializeField] private GameObject[] spawnObjects;
     [SerializeField] private GameObject Camera;
     [SerializeField] private GameObject Enemy;
-    [SerializeField] private BossControl boss;
+    [SerializeField] private GameObject boss;
 
     List<MonoBehaviour> pauseScripts = new List<MonoBehaviour>();
     int playernum, counter;
@@ -25,7 +25,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             PlayerID.Instance.Init();
             PlayerID.Instance.PlayerTypes[0] = PlayerType.Witch;
             //PlayerID.Instance.PlayerTypes[1] = PlayerType.Witch;
-            //PlayerID.Instance.PlayerTypes[2] = PlayerType.Witch;
+            PlayerID.Instance.PlayerTypes[2] = PlayerType.Witch;
             //PlayerID.Instance.PlayerTypes[3] = PlayerType.Witch;
         }
         playernum = 0;
@@ -40,6 +40,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             InstantiatePlayer(i, PlayerID.Instance.PlayerTypes[i]);
         }
         EnemyList = new List<LockOnable>();
+        boss = Instantiate(boss, Vector3.zero, Quaternion.identity);
         //InstantiateEnemy();
     }
 
@@ -50,7 +51,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             player.gameObject.SendMessage("ChangeState", PlayerState.Moveable);
         }
 
-        boss.gameObject.SendMessage("ChangeState", BossState.Idle);
+        boss.SendMessage("ChangeState", BossState.Idle);
     }
 
     void InstantiatePlayer(int id, PlayerType type)
@@ -63,9 +64,9 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             var camera = Instantiate(Camera, spawnobj.transform).GetComponent<Camera>();
             camera.tag = (id + 1) + "P";
             camera.rect = SetCam(counter, playernum);
-            counter++;
             PlayerList.Add(spawnobj.GetComponent<PlayerMover>());
-            PlayerList[id].setCamera(camera.GetComponent<PlayerCameraControl>(), -90.0f * id);
+            PlayerList[counter].setCamera(camera.GetComponent<PlayerCameraControl>(), -90.0f * id);
+            counter++;
         }
     }
 
@@ -82,9 +83,9 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
         return new Rect(x, y, width, height);
     }
 
-    void InstantiateEnemy()
+    void InstantiateEnemy(int i)
     {
-        Instantiate(Enemy);
+        Instantiate(Enemy, spawnPos[i].transform.position, Quaternion.identity);
     }
 
     public void RemoveEnemy(LockOnable enemy)
@@ -121,5 +122,13 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             script.enabled = true;
         }
         pauseScripts.Clear();
+    }
+
+    public void InstantiateCallEnemy()
+    {
+        for (int i = 0; i < PlayerList.Count; i++)
+        {
+            InstantiateEnemy(i);
+        }
     }
 }

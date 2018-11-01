@@ -30,7 +30,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
     readonly float[] interval = { 0.0f, 0.5f, 0.5f, 0.2f, 1.0f, 1.0f, 1.0f, 0.2f, 3.0f };
     [SerializeField] float breathDistance = 2.0f;
 
-    float jumpDistance = 3.5f;
+    float jumpDistance = 2.5f;
     BossAttackState attack = BossAttackState.None;
     Transform target;
     float stopDistance;
@@ -78,8 +78,18 @@ public class BossControl : EnemyControl<BossControl, BossState>
                 owner.attack = BossAttackState.RotationAttack;
                 owner.ChangeState(BossState.Attack);
             }
-            else if (SetTarget() > owner.jumpDistance && 0.0f > Random.value)
+            else if (SetTarget() > owner.jumpDistance && 0.6f > Random.value)
                 owner.ChangeState(BossState.WalkToPlayerJump);
+            else if (0.05f> Random.value)
+            {
+                owner.attack = BossAttackState.Magic;
+                owner.ChangeState(BossState.Attack);
+            }
+            else if (0.05f > Random.value)
+            {
+                owner.attack = BossAttackState.Shout;
+                owner.ChangeState(BossState.Attack);
+            }
             else
                 owner.ChangeState(BossState.WalkToPlayer);
         }
@@ -166,6 +176,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
     class StateWalkToPlayerJump : State<BossControl>
     {
+        Vector3 prev;
         public StateWalkToPlayerJump(BossControl owner) : base(owner, BossState.WalkToPlayerJump)
         {
         }
@@ -173,11 +184,35 @@ public class BossControl : EnemyControl<BossControl, BossState>
         public override void Enter()
         {
             owner.agent.stoppingDistance = owner.jumpDistance;
+            owner.attack = BossAttackState.JumpAttack;
+            prev = owner.agent.desiredVelocity;
         }
 
         public override void Execute()
         {
+            var t = (prev + owner.agent.desiredVelocity) / 2.0f;
+            prev = owner.agent.desiredVelocity;
             owner.agent.SetDestination(owner.target.position);
+            var forward = Vector3.Dot(t, owner.transform.forward);
+            var angle = GetAngle(t);
+            if (owner.agent.remainingDistance <= owner.agent.stoppingDistance && Mathf.Abs(angle) <= 0.1f)
+            {
+                owner.ChangeState(BossState.Attack);
+            }
+            else
+            {
+                owner.animator.SetFloat("Forward", forward);
+                owner.animator.SetFloat("Right", angle);
+            }
+        }
+
+        float GetAngle(Vector3 dir)
+        {
+            dir = Vector3.Scale(dir, new Vector3(1, 0, 1));
+            var angle = Vector3.Angle(dir, Vector3.Scale(owner.transform.forward, new Vector3(1, 0, 1)));
+            if (Vector3.Angle(dir, Vector3.Scale(owner.transform.right, new Vector3(1, 0, 1))) > 90.0f)
+                angle = -angle;
+            return angle / 90.0f;
         }
     }
 
@@ -208,8 +243,19 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
     private void OnAnimatorMove()
     {
-        //transform.position += animator.deltaPosition * 100;
+        if (IsCurrentState(BossState.Attack))
+            transform.position += animator.deltaPosition * 100;
         agent.speed = animator.deltaPosition.magnitude * 100.0f / Time.deltaTime;
         transform.rotation = animator.rootRotation;
+    }
+
+    public void CallEnemy()
+    {
+        InstantiateObjectManager.Instance.InstantiateCallEnemy();
+    }
+
+    public void Magic()
+    {
+
     }
 }
