@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager>
 {
-    [SerializeField] private bool isDebug;
     [SerializeField] private Transform[] spawnPos;
     [SerializeField] private GameObject[] spawnObjects;
     [SerializeField] private GameObject Camera;
@@ -20,14 +19,6 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
     {
         base.Awake();
         PlayerList = new List<PlayerMover>();
-        if (isDebug)
-        {
-            PlayerID.Instance.Init();
-            PlayerID.Instance.PlayerTypes[0] = PlayerType.Witch;
-            //PlayerID.Instance.PlayerTypes[1] = PlayerType.Witch;
-            PlayerID.Instance.PlayerTypes[2] = PlayerType.Witch;
-            //PlayerID.Instance.PlayerTypes[3] = PlayerType.Witch;
-        }
         playernum = 0;
         counter = 0;
         foreach (var type in PlayerID.Instance.PlayerTypes)

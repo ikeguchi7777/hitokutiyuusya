@@ -238,9 +238,9 @@ MonoBehaviour:
   - {fileID: 561746652}
   - {fileID: 70453347}
   spawnObjects:
+  - {fileID: 1200519260268616, guid: 1bfd51c438484794bb33543ef0b17e8e, type: 2}
   - {fileID: 1738427410392074, guid: 22761b28cbf16554ca338eb1fdd01428, type: 2}
-  - {fileID: 1738427410392074, guid: 22761b28cbf16554ca338eb1fdd01428, type: 2}
-  - {fileID: 1738427410392074, guid: 22761b28cbf16554ca338eb1fdd01428, type: 2}
+  - {fileID: 1599271107745530, guid: 4f4e496b833dbfa40a7d4a5878ffe570, type: 2}
   Camera: {fileID: 1066903115528718, guid: 9ebea831a5757dc4ea75b5223abad4da, type: 2}
   Enemy: {fileID: 1138058008461544, guid: 9f773aaebb3adff438095eeffb4c41c0, type: 2}
   boss: {fileID: 1010421134287990, guid: 0e2c349b132d87a43b824f3639452dac, type: 2}

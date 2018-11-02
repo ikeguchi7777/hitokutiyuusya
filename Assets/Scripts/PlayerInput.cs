@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class PlayerInput
 {
-
-    string[] axis;
-
     bool isActive;
     float time = 0.0f;
     const float interval = 0.8f;
     const float interval_name = 0.2f;
-
     List<string> axislist = new List<string>();
     List<string> buttonlist = new List<string>();
     string X;
@@ -55,13 +51,13 @@ public class PlayerInput
         SetButton(EButton.SpecialAttack, "GamePad" + id + "_SpecialAttack");
         SetButton(EButton.Select, "GamePad" + id + "_Select");
         SetButton(EButton.LockOn, "GamePad" + id + "_LockOn");
+        isActive = true;
     }
 
     public float GetAxis(EAxis axis)
     {
         return Input.GetAxis(axislist[(int)axis]);
     }
-
 
     public int GetAxisPulse(EAxis axis)
     {
