@@ -101,8 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Distance: 5
-  _pitch: 20
-  pmax: 70
-  pmin: 0
-  PitchRate: 100
-  YawRate: 150
+  Pitch: 20
+  PitchRate: 10
+  YawRate: 10

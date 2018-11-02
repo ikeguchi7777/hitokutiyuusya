@@ -7,11 +7,11 @@ using UnityEngine;
 [RequireComponent(typeof(IKLookAt))]
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] float m_MoveSpeed = 1;
-    [SerializeField] float m_TurnRate = 10;
-    [SerializeField] float m_TurnPow = 3;
+    [SerializeField] float m_MoveSpeed;
+    [SerializeField] float m_TurnRate;
+    [SerializeField] float m_TurnPow;
     [SerializeField] private bool isLockon = false;
-    [SerializeField] float LockOnChangeInterval = 0.5f;
+    [SerializeField] float LockOnChangeInterval;
     private PlayerCameraControl playerCamera;
 
     private Animator m_Animator;
@@ -126,10 +126,9 @@ public class PlayerMover : MonoBehaviour
         m_Animator.SetFloat("Forward", forward);
     }
 
-    public void Evade()
+    public void Evade(float x)
     {
-        m_Animator.SetTrigger("Evade");
-        /*float rad;
+        float rad;
         var forward = m_Animator.GetFloat("Forward");
         if (isLockon)
         {
@@ -146,7 +145,7 @@ public class PlayerMover : MonoBehaviour
             rad = GetAngle(transform.forward, direction);
         transform.localEulerAngles += new Vector3(0, Mathf.Clamp(rad, -m_TurnRate, m_TurnRate), 0);
         speed = 0;
-        characterController.Move(direction * x * Time.deltaTime);*/
+        characterController.Move(direction * x * Time.deltaTime);
     }
 
     public void setCamera(PlayerCameraControl cam, float y)
@@ -157,7 +156,7 @@ public class PlayerMover : MonoBehaviour
 
     public void CameraMove(float h, float v)
     {
-        playerCamera.Pitch += (v * playerCamera.PitchRate * Time.deltaTime);
+        playerCamera.Pitch += v * playerCamera.PitchRate;
         if (isLockon)
         {
             if (Time.time - pastTime > LockOnChangeInterval)
@@ -167,15 +166,12 @@ public class PlayerMover : MonoBehaviour
             }
         }
         else
-            playerCamera.Yaw += (h * playerCamera.YawRate * Time.deltaTime);
+            playerCamera.Yaw += h * playerCamera.YawRate;
     }
     private void OnAnimatorMove()
     {
         var v = m_Animator.deltaPosition * speed;
-        if (!characterController.isGrounded)
-            v += Vector3.down * 9.8f;
         characterController.Move(v);
-        transform.rotation = m_Animator.rootRotation;
     }
 
     void Awake()
@@ -183,20 +179,10 @@ public class PlayerMover : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         ikLookAt = GetComponent<IKLookAt>();
-        ikLookAt.enabled = false;
     }
-
-    public void Attack(int type)
+    private void OnDestroy()
     {
-        m_Animator.SetInteger("AttackType", type);
-        m_Animator.SetTrigger("Attack");
-    }
-
-    public void ResetFlags()
-    {
-        m_Animator.SetFloat("Forward", 0);
-        m_Animator.SetInteger("AttackType", -1);
-        m_Animator.ResetTrigger("Attack");
-        m_Animator.ResetTrigger("Evade");
+        if (playerCamera)
+            Destroy(playerCamera.gameObject);
     }
 }

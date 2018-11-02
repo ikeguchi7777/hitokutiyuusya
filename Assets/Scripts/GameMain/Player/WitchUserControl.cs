@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class WitchUserControl : PlayerUserControl<WitchUserControl>
 {
-    protected override void AttackEnd()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void AttackStart()
-    {
-        throw new System.NotImplementedException();
-    }
 
     class WeakAttackState : State<WitchUserControl>
     {

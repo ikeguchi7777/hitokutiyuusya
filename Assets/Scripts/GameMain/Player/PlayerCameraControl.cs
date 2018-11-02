@@ -17,18 +17,7 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
 
     public Transform player { set; private get; }
     public Transform LockOnTransform { set; private get; }
-    [SerializeField] private float _pitch,pmax,pmin;
-    public float Pitch {
-        get { return _pitch; }
-        set
-        {
-            _pitch = value;
-            if (_pitch > pmax)
-                _pitch = pmax;
-            else if (_pitch < pmin)
-                _pitch = pmin;
-        }
-    }
+    public float Pitch;
     public float Yaw { set; get; }
     public float PitchRate;
     public float YawRate;
@@ -63,10 +52,10 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
 
         public override void Execute()
         {
-            if (owner.Yaw > 180.0f)
-                owner.Yaw -= 360.0f;
-            else if (owner.Yaw < -180.0f)
-                owner.Yaw += 360.0f;
+            if (owner.Yaw > 180)
+                owner.Yaw -= 360;
+            else if (owner.Yaw < -180)
+                owner.Yaw += 360;
             var dir = Quaternion.Euler(owner.Pitch, owner.Yaw, 0.0f) * Vector3.back * owner.Distance;
             owner.transform.position = owner.player.position + dir;
             owner.transform.LookAt(owner.player);
@@ -75,34 +64,31 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
 
     class StateToLockOn : State<PlayerCameraControl>
     {
-        float time;
-        float yaw;
-        Quaternion quaternion;
+        Quaternion to;
+        Tweener tweener, d_tweener;
         public StateToLockOn(PlayerCameraControl owner) : base(owner, CameraState.ToLockOn) { }
 
         public override void Enter()
         {
-            time = 0.0f;
-            owner.Yaw %= 360.0f;
-            if (owner.Yaw > 180.0f)
-                owner.Yaw -= 360.0f;
-            else if (owner.Yaw < -180.0f)
-                owner.Yaw += 360.0f;
-            yaw = owner.Yaw;
-            quaternion = owner.transform.rotation;
+            to = Quaternion.LookRotation(owner.LockOnTransform.position - owner.transform.position);
+            tweener = owner.transform.DORotateQuaternion(to, 0.5f);
+            d_tweener = DOTween.To(() => owner.Yaw, num => owner.Yaw = num, GetYaw(), 0.5f);
         }
 
-        public override void FixedExecute()
+        public override void Execute()
         {
-            if (owner.LockOnTransform == null)
-                owner.ChangeState(CameraState.FromLockOn);
-            owner.Yaw = Mathf.Lerp(yaw, GetYaw(), time * 2.0f);
-            owner.transform.rotation = Quaternion.Lerp(quaternion, Quaternion.LookRotation(owner.LockOnTransform.position - owner.transform.position), time * 2.0f);
+            to = Quaternion.LookRotation(owner.LockOnTransform.position - owner.transform.position);
             var dir = Quaternion.Euler(owner.Pitch, owner.Yaw, 0.0f) * Vector3.back * owner.Distance;
             owner.transform.position = owner.player.position + dir;
-            time += Time.deltaTime;
-            if (time > 0.5f)
+            Debug.Log(owner.Yaw);
+            if (tweener.position >= 0.5f)
                 owner.ChangeState(CameraState.LockOn);
+            else
+            {
+                var t = tweener.position + Time.deltaTime;
+                tweener.ChangeEndValue(to).Goto(t);
+                d_tweener.ChangeEndValue(GetYaw()).Goto(t);
+            }
         }
 
         float GetYaw()
@@ -110,14 +96,20 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
             var dir = (owner.player.position - owner.LockOnTransform.position);
             dir = Vector3.Scale(dir, new Vector3(1, 0, 1)).normalized;
             var angle = Vector3.Angle(Vector3.back, dir) * (dir.x < 0 ? 1 : -1);
-            if (angle * owner.Yaw < -180.0f)
+            if (angle * owner.Yaw < -180)
             {
                 if (angle < 0)
-                    angle += 360.0f;
+                    angle += 360;
                 else
-                    angle -= 360.0f;
+                    angle -= 360;
             }
             return angle;
+        }
+
+        public override void Exit()
+        {
+            tweener.Kill();
+            d_tweener.Kill();
         }
     }
 

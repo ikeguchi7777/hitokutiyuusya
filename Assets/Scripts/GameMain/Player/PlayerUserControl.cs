@@ -11,27 +11,22 @@ public enum PlayerState
     SpecialAttack
 }
 
-public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
+public class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
     where T : PlayerUserControl<T>
 {
-    static int _id = 0;
-    int id = 0;
+    PlayerInputKey PlayerKey = new PlayerInputKey(1); //debug
     private PlayerMover playerMover;
     public GameObject LockOnObject { get; private set; }
-    [SerializeField] float strongrecasttime, specialrecasttime;
-    Recast strongRecast, specialRecast;
 
     protected override void Update()
     {
         base.Update();
-        specialRecast.AddTime(Time.deltaTime);
-        strongRecast.AddTime(Time.deltaTime);
-        if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.LockOn))
+        if (Input.GetButtonDown(PlayerKey.LockOn))
         {
             playerMover.SwitchLockOn();
         }
-        var camh = PlayerInput.PlayerInputs[id].GetAxis(EAxis.CamX);
-        var camv = PlayerInput.PlayerInputs[id].GetAxis(EAxis.CamY);
+        var camh = Input.GetAxis(PlayerKey.CamX);
+        var camv = Input.GetAxis(PlayerKey.CamY);
         playerMover.CameraMove(camh, camv);
     }
 
@@ -39,16 +34,12 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
     {
         base.Awake();
         playerMover = GetComponent<PlayerMover>();
-        strongRecast = new Recast(strongrecasttime);
-        specialRecast = new Recast(specialrecasttime);
-        setParams();
     }
 
-    public void setParams()
+    public void setParams(int id)
     {
-        id = _id;
-        _id++;
-        playerMover.CameraFlag = 1 << id;
+        PlayerKey = new PlayerInputKey(id);
+        playerMover.CameraFlag = 1 << (id - 1);
     }
     protected override PlayerState GetFirstState()
     {
@@ -66,14 +57,6 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
     }
 
-    protected void Attack(PlayerState type)
-    {
-        playerMover.Attack((int)type - (int)PlayerState.WeakAttack);
-    }
-
-    protected abstract void AttackStart();
-    protected abstract void AttackEnd();
-
     #region State
     protected class StateMoveable : State<T>
     {
@@ -81,31 +64,29 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
         public override void Execute()
         {
-            if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.Evade))
+            if (Input.GetButtonDown(owner.PlayerKey.Evade))
             {
                 owner.ChangeState(PlayerState.Evade);
                 return;
             }
-            else if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.WeakAttackAndSubmit))
+            else if (Input.GetButtonDown(owner.PlayerKey.WeakAttack))
             {
                 owner.ChangeState(PlayerState.WeakAttack);
             }
-            else if (owner.strongRecast.Useable && PlayerInput.PlayerInputs[id].GetButtonDown(EButton.StrongAttack))
+            else if (Input.GetButtonDown(owner.PlayerKey.StrongAttack))
             {
-                owner.strongRecast.Useable = false;
                 owner.ChangeState(PlayerState.StrongAttack);
             }
-            else if (owner.specialRecast.Useable && PlayerInput.PlayerInputs[id].GetButtonDown(EButton.SpecialAttack))
+            else if (Input.GetButtonDown(owner.PlayerKey.SpecialAttack))
             {
-                owner.specialRecast.Useable = false;
                 owner.ChangeState(PlayerState.SpecialAttack);
             }
         }
 
         public override void FixedExecute()
         {
-            var h = PlayerInput.PlayerInputs[id].GetAxis(EAxis.X);
-            var v = PlayerInput.PlayerInputs[id].GetAxis(EAxis.Y);
+            var h = Input.GetAxis(owner.PlayerKey.X);
+            var v = Input.GetAxis(owner.PlayerKey.Y);
             owner.playerMover.Move(h, v);
         }
     }
@@ -118,11 +99,10 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         public override void Enter()
         {
             time = 0.0f;
-            owner.playerMover.Evade();
         }
 
         public override void Execute()
-        {/*
+        {
             if (time < 0.2f)
             {
                 time += Time.deltaTime;
@@ -130,39 +110,35 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
                 owner.playerMover.Evade(x);
             }
             else
-                owner.ChangeState(PlayerState.Moveable);*/
+                owner.ChangeState(PlayerState.Moveable);
         }
     }
     #endregion
-
-    class Recast
+    class PlayerInputKey
     {
-        float time,recast;
-        bool useable;
-        public bool Useable
+        public PlayerInputKey(int id)
         {
-            get
-            {
-                return useable;
-            }
-            set
-            {
-                useable = value;
-                time = 0.0f;
-            }
+            X = "GamePad" + id + "_X";
+            Y = "GamePad" + id + "_Y";
+            CamX = "GamePad" + id + "_CamX";
+            CamY = "GamePad" + id + "_CamY";
+            Evade = "GamePad" + id + "_Evade and Cancel";
+            WeakAttack = "GamePad" + id + "_WeakAttack and Submit";
+            StrongAttack = "GamePad" + id + "_StrongAttack";
+            SpecialAttack = "GamePad" + id + "_SpecialAttack";
+            Select = "GamePad" + id + "_Select";
+            LockOn = "GamePad" + id + "_LockOn";
         }
-        public Recast(float recastTime)
-        {
-            recast = recastTime;
-        }
-        
-        public void AddTime(float value)
-        {
-            if (useable)
-                return;
-            time += value;
-            if (time > recast)
-                useable = true;
-        }
+
+        public string X { get; private set; }
+        public string Y { get; private set; }
+        public string CamX { get; private set; }
+        public string CamY { get; private set; }
+        public string Evade { get; private set; }
+        public string WeakAttack { get; private set; }
+        public string StrongAttack { get; private set; }
+        public string SpecialAttack { get; private set; }
+        public string Select { get; private set; }
+        public string LockOn { get; private set; }
     }
 }
