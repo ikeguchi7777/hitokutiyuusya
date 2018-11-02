@@ -380,7 +380,10 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attack
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102960986332527838}
   m_Solo: 0
@@ -678,7 +681,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Evade
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101029905519560120}
@@ -910,7 +913,7 @@ AnimatorStateMachine:
     m_Position: {x: 372, y: -204, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102521838963096802}
-    m_Position: {x: 348, y: -84, z: 0}
+    m_Position: {x: 360, y: -72, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 1107587099715487566}

@@ -52,6 +52,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
         GameObject spawnobj = Instantiate(spawnObjects[(int)type - 1], spawnPos[id].position, spawnPos[id].rotation);
         if (spawnobj != null)
         {
+            spawnobj.SendMessage("setParams", id);
             var camera = Instantiate(Camera, spawnobj.transform).GetComponent<Camera>();
             camera.tag = (id + 1) + "P";
             camera.rect = SetCam(counter, playernum);

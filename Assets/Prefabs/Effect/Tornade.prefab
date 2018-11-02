@@ -20,6 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4097837507862010}
   - component: {fileID: 114690493846847514}
+  - component: {fileID: 135520187307559630}
+  - component: {fileID: 114138721937901830}
+  - component: {fileID: 114354633237975610}
   m_Layer: 0
   m_Name: Tornade
   m_TagString: Untagged
@@ -40,6 +43,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114138721937901830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420186223186998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ecd81201dd52324c9c8b6ba49b54741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  destroy: 0
+  time: 2.8
+--- !u!114 &114354633237975610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420186223186998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7d0b5e517c7064f8c8c0aec201f6f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 10
+  critical: 1
 --- !u!114 &114690493846847514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,5 +83,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: Tornade
   playOnStart: 1
-  loop: 0
+  loop: 1
   isAutoDestroy: 1
+--- !u!135 &135520187307559630
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420186223186998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}

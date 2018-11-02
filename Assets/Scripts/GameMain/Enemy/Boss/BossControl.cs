@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public enum BossState
@@ -263,5 +264,12 @@ public class BossControl : EnemyControl<BossControl, BossState>
     public void Magic()
     {
         Instantiate(MagicEffect, target.position, Quaternion.identity);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Ranking.Instance.Score = 3000;
+        SceneManager.LoadScene("Result");
     }
 }

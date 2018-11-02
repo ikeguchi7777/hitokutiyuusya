@@ -1258,10 +1258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6543e1f054fd4d14487d1234b9c7e3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
+  Health: 100
   Attack: 0
   Defence: 0
-  WincePoint: 0
+  WincePoint: 10
   Critical: 0
   breathDistance: 2
   MagicEffect: {fileID: 1391792482185828, guid: 5a2d28b1d957715428b2c90c6f3ce67e,

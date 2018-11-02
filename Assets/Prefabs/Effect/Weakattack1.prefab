@@ -38,7 +38,9 @@ GameObject:
   - component: {fileID: 4441599177690786}
   - component: {fileID: 198144455177614744}
   - component: {fileID: 199842184875220324}
-  m_Layer: 0
+  - component: {fileID: 135101077347417518}
+  - component: {fileID: 114131896976140732}
+  m_Layer: 12
   m_Name: Weakattack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,6 +172,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114131896976140732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258797542417604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ecd81201dd52324c9c8b6ba49b54741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  destroy: 1
+  time: 5
+--- !u!135 &135101077347417518
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258797542417604}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198144455177614744
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -61,21 +61,11 @@ public class MonkUserControl : PlayerUserControl<MonkUserControl> {
 
     public void StrongAttack()
     {
-        Quaternion quaternion;
-        if (playerMover.LockOnObject == null)
-            quaternion = transform.rotation;
-        else
-            quaternion = Quaternion.LookRotation(playerMover.LockOnObject.position - transform.position);
-        Instantiate(strong, socket.transform.position, quaternion);
+        Instantiate(strong, socket.transform.position, playerMover.GetAttackQuaternion());
     }
 
     public void WeakAttack()
     {
-        Quaternion quaternion;
-        if (playerMover.LockOnObject == null)
-            quaternion = transform.rotation;
-        else
-            quaternion = Quaternion.LookRotation(playerMover.LockOnObject.position - transform.position);
-        Instantiate(weak, socket.transform.position, quaternion);
+        Instantiate(weak, socket.transform.position, playerMover.GetAttackQuaternion());
     }
 }

@@ -60,7 +60,7 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
         enemyWeapon.DeActive();
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         if (InstantiateObjectManager.Instance)
             InstantiateObjectManager.Instance.RemoveEnemy(this);

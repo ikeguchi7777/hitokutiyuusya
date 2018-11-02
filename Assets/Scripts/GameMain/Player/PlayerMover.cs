@@ -186,4 +186,11 @@ public class PlayerMover : MonoBehaviour
         m_Animator.ResetTrigger("Attack");
         m_Animator.ResetTrigger("Evade");
     }
+
+    public Quaternion GetAttackQuaternion()
+    {
+        if (lockonTransform)
+            return Quaternion.LookRotation(lockonTransform.position - transform.position);
+        return transform.rotation;
+    }
 }

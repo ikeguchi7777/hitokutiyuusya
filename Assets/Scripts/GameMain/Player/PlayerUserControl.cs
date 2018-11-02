@@ -18,7 +18,6 @@ public enum PlayerState
 public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
     where T : PlayerUserControl<T>
 {
-    static int _id = 0;
     protected int id;
     bool isDamage = false;
     protected PlayerMover playerMover;
@@ -47,13 +46,11 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         playerMover = GetComponent<PlayerMover>();
         strongRecast = new Recast(strongrecasttime);
         specialRecast = new Recast(specialrecasttime);
-        setParams();
     }
 
-    public void setParams()
+    public void setParams(int id)
     {
-        id = _id;
-        _id++;
+        this.id = id;
         playerMover.CameraFlag = 1 << id;
         Debug.Log(id);
     }

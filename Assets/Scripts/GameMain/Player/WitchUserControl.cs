@@ -23,7 +23,13 @@ public class WitchUserControl : PlayerUserControl<WitchUserControl>
 
         public override void Enter()
         {
-            owner.ChangeState(PlayerState.WeakAttack);
+            owner.Attack(PlayerState.WeakAttack);
+        }
+
+        public override void Execute()
+        {
+            if (PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.WeakAttackAndSubmit))
+                owner.Attack(PlayerState.WeakAttack);
         }
     }
 
@@ -48,17 +54,17 @@ public class WitchUserControl : PlayerUserControl<WitchUserControl>
 
     public void WeakAttack(int i)
     {
-        Instantiate(WeakMagic[i - 1], socket.position, transform.rotation);
+        Instantiate(WeakMagic[i - 1], socket.position, playerMover.GetAttackQuaternion());
     }
 
     public void StrongAttack()
     {
-        Instantiate(StrongMagic, socket.position, transform.rotation);
+        Instantiate(StrongMagic, socket.position, playerMover.GetAttackQuaternion());
     }
 
     public void SpecialAttack()
     {
-
+        Instantiate(SpecialMagic, socket.position, playerMover.GetAttackQuaternion());
     }
 
     protected override void StateListInit()
