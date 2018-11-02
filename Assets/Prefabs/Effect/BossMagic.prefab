@@ -9,17 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1204700827909272}
+  m_RootGameObject: {fileID: 1391792482185828}
   m_IsPrefabAsset: 1
---- !u!1 &1204700827909272
+--- !u!1 &1391792482185828
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4359442747470600}
-  - component: {fileID: 114775210427096100}
+  - component: {fileID: 4856088424660494}
+  - component: {fileID: 114584800281050714}
+  - component: {fileID: 135295027695492520}
+  - component: {fileID: 114483497776985578}
   m_Layer: 0
   m_Name: BossMagic
   m_TagString: Untagged
@@ -27,25 +29,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4359442747470600
+--- !u!4 &4856088424660494
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1204700827909272}
+  m_GameObject: {fileID: 1391792482185828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40, y: 0, z: 100}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.5, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114775210427096100
+--- !u!114 &114483497776985578
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1204700827909272}
+  m_GameObject: {fileID: 1391792482185828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15a96da8721e7a44a34c3ebd11c80a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 10
+  critical: 0.1
+--- !u!114 &114584800281050714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1391792482185828}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
@@ -53,4 +68,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: LightningStrike
   playOnStart: 1
-  loop: 1
+  loop: 0
+  isAutoDestroy: 1
+--- !u!135 &135295027695492520
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1391792482185828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}

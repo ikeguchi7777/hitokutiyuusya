@@ -220,6 +220,7 @@ MonoBehaviour:
   effectName: Tornade
   playOnStart: 1
   loop: 1
+  isAutoDestroy: 0
 --- !u!4 &52573726
 Transform:
   m_ObjectHideFlags: 0
@@ -299,6 +300,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 21.87, y: -126.600006, z: -37.393}
+--- !u!1001 &827832395
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4932284091943646, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932284091943646, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932284091943646, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932284091943646, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932284091943646, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932284091943646, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932284091943646, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932284091943646, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1184435634
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +372,7 @@ MonoBehaviour:
   effectName: SonicBoom
   playOnStart: 1
   loop: 1
+  isAutoDestroy: 0
 --- !u!4 &1184435636
 Transform:
   m_ObjectHideFlags: 0
@@ -372,6 +416,7 @@ MonoBehaviour:
   effectName: Thunder
   playOnStart: 1
   loop: 1
+  isAutoDestroy: 0
 --- !u!4 &1281952640
 Transform:
   m_ObjectHideFlags: 0
@@ -415,6 +460,7 @@ MonoBehaviour:
   effectName: boss_death
   playOnStart: 1
   loop: 1
+  isAutoDestroy: 0
 --- !u!4 &1334697179
 Transform:
   m_ObjectHideFlags: 0
@@ -427,49 +473,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1345295037
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1345295039}
-  - component: {fileID: 1345295038}
-  m_Layer: 0
-  m_Name: healing
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1345295038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1345295037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectName: healing
-  playOnStart: 1
-  loop: 1
---- !u!4 &1345295039
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1345295037}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60, y: 0, z: 100}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1358779441
 GameObject:
@@ -501,6 +504,7 @@ MonoBehaviour:
   effectName: swordeffect3
   playOnStart: 1
   loop: 1
+  isAutoDestroy: 0
 --- !u!4 &1358779443
 Transform:
   m_ObjectHideFlags: 0
@@ -616,6 +620,7 @@ MonoBehaviour:
   effectName: LightningStrike
   playOnStart: 1
   loop: 1
+  isAutoDestroy: 0
 --- !u!4 &1419334061
 Transform:
   m_ObjectHideFlags: 0
@@ -701,6 +706,7 @@ MonoBehaviour:
   effectName: blowhit
   playOnStart: 1
   loop: 1
+  isAutoDestroy: 0
 --- !u!4 &1681091621
 Transform:
   m_ObjectHideFlags: 0
@@ -744,6 +750,7 @@ MonoBehaviour:
   effectName: fireball
   playOnStart: 1
   loop: 1
+  isAutoDestroy: 0
 --- !u!4 &1791559767
 Transform:
   m_ObjectHideFlags: 0

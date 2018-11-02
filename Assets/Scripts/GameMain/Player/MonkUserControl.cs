@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MonkUserControl : PlayerUserControl<MonkUserControl> {
+    [SerializeField] GameObject socket, heal, weak, strong;
     protected override void AttackEnd()
     {
         throw new NotImplementedException();
@@ -48,5 +49,33 @@ public class MonkUserControl : PlayerUserControl<MonkUserControl> {
         {
             owner.Attack(PlayerState.SpecialAttack);
         }
+    }
+
+    public void Heal()
+    {
+        foreach (var player in InstantiateObjectManager.Instance.PlayerList)
+        {
+            Instantiate(heal, player.transform);
+        }
+    }
+
+    public void StrongAttack()
+    {
+        Quaternion quaternion;
+        if (playerMover.LockOnObject == null)
+            quaternion = transform.rotation;
+        else
+            quaternion = Quaternion.LookRotation(playerMover.LockOnObject.position - transform.position);
+        Instantiate(strong, socket.transform.position, quaternion);
+    }
+
+    public void WeakAttack()
+    {
+        Quaternion quaternion;
+        if (playerMover.LockOnObject == null)
+            quaternion = transform.rotation;
+        else
+            quaternion = Quaternion.LookRotation(playerMover.LockOnObject.position - transform.position);
+        Instantiate(weak, socket.transform.position, quaternion);
     }
 }

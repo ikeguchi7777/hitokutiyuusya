@@ -127,24 +127,7 @@ public class PlayerMover : MonoBehaviour
     public void Evade()
     {
         m_Animator.SetTrigger("Evade");
-        /*float rad;
-        var forward = m_Animator.GetFloat("Forward");
-        if (isLockon)
-        {
-            rad = -GetAngle(camForward, transform.forward) + GetAngle(camForward, direction);
-
-            if (forward < 0.0f)
-            {
-                rad = (rad > 0.0f ? rad - 180.0f : rad + 180.0f);
-                forward = -1;
-            }
-            else forward = 1;
-        }
-        else
-            rad = GetAngle(transform.forward, direction);
-        transform.localEulerAngles += new Vector3(0, Mathf.Clamp(rad, -m_TurnRate, m_TurnRate), 0);
-        speed = 0;
-        characterController.Move(direction * x * Time.deltaTime);*/
+        speed = 2.0f * m_MoveSpeed;
     }
 
     public void Death()
@@ -179,10 +162,7 @@ public class PlayerMover : MonoBehaviour
     }
     private void OnAnimatorMove()
     {
-        transform.position+= m_Animator.deltaPosition * speed;
-        /*if (!characterController.isGrounded)
-            v += Vector3.down * 9.8f;
-        characterController.Move(v);*/
+        transform.position += m_Animator.deltaPosition * speed;
         transform.rotation = m_Animator.rootRotation;
     }
 

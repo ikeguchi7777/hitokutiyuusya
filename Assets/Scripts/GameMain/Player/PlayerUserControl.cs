@@ -21,7 +21,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
     static int _id = 0;
     protected int id;
     bool isDamage = false;
-    private PlayerMover playerMover;
+    protected PlayerMover playerMover;
     public GameObject LockOnObject { get; private set; }
     [SerializeField] float Health = 100, Defence = 3, WincePoint = 1;
     [SerializeField] float strongrecasttime, specialrecasttime;
@@ -59,7 +59,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
     }
     protected override PlayerState GetFirstState()
     {
-        return PlayerState.Moveable;
+        return PlayerState.Wait;
     }
 
     protected override void StateListInit()

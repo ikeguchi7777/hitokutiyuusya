@@ -1264,6 +1264,8 @@ MonoBehaviour:
   WincePoint: 0
   Critical: 0
   breathDistance: 2
+  MagicEffect: {fileID: 1391792482185828, guid: 5a2d28b1d957715428b2c90c6f3ce67e,
+    type: 2}
 --- !u!135 &135241171148417398
 SphereCollider:
   m_ObjectHideFlags: 1

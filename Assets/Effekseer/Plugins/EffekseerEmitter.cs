@@ -41,6 +41,8 @@ public class EffekseerEmitter : MonoBehaviour
 	/// 最後にPlayされたハンドル
 	/// </summary>
 	private EffekseerHandle? handle;
+
+    [SerializeField] bool isAutoDestroy;
 	
 	/// <summary xml:lang="en">
 	/// Plays the effect.
@@ -84,6 +86,8 @@ public class EffekseerEmitter : MonoBehaviour
 			handle.Value.Stop();
 			handle = null;
 		}
+        if (isAutoDestroy)
+            Destroy(gameObject);
 	}
 	
 	/// <summary xml:lang="en">

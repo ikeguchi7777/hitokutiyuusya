@@ -29,6 +29,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
     readonly float[] interval = { 0.0f, 0.5f, 0.5f, 0.2f, 1.0f, 1.0f, 1.0f, 0.2f, 3.0f };
     [SerializeField] float breathDistance = 2.0f;
+    [SerializeField] GameObject MagicEffect;
 
     float jumpDistance = 2.5f;
     BossAttackState attack = BossAttackState.None;
@@ -78,14 +79,14 @@ public class BossControl : EnemyControl<BossControl, BossState>
                 owner.attack = BossAttackState.RotationAttack;
                 owner.ChangeState(BossState.Attack);
             }
-            else if (SetTarget() > owner.jumpDistance && 0.6f > Random.value)
+            else if (SetTarget() > owner.jumpDistance && 0.3f > Random.value)
                 owner.ChangeState(BossState.WalkToPlayerJump);
-            else if (0.05f> Random.value)
+            else if (0.1f> Random.value)
             {
                 owner.attack = BossAttackState.Magic;
                 owner.ChangeState(BossState.Attack);
             }
-            else if (0.05f > Random.value)
+            else if (0.1f > Random.value)
             {
                 owner.attack = BossAttackState.Shout;
                 owner.ChangeState(BossState.Attack);
@@ -244,18 +245,23 @@ public class BossControl : EnemyControl<BossControl, BossState>
     private void OnAnimatorMove()
     {
         if (IsCurrentState(BossState.Attack))
-            transform.position += animator.deltaPosition * 100;
+        {
+            transform.position += animator.deltaPosition * 500;
+        }
         agent.speed = animator.deltaPosition.magnitude * 100.0f / Time.deltaTime;
+        if ((IsCurrentState(BossState.WalkToPlayer) || IsCurrentState(BossState.WalkToPlayerJump)) && agent.speed == 0.0f)
+            agent.speed = 1.0f;
         transform.rotation = animator.rootRotation;
     }
 
     public void CallEnemy()
     {
-        InstantiateObjectManager.Instance.InstantiateCallEnemy();
+        if (attack == BossAttackState.Shout)
+            InstantiateObjectManager.Instance.InstantiateCallEnemy();
     }
 
     public void Magic()
     {
-
+        Instantiate(MagicEffect, target.position, Quaternion.identity);
     }
 }

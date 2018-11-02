@@ -118,7 +118,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400008, guid: 777a644e04cf0524cb01c2168dde4d13, type: 3}
+    m_Motion: {fileID: 7400008, guid: deb7e13307ad61a4593c6db39b1192a0, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
