@@ -43,6 +43,7 @@ public class Ranking {
     {
         ScoreRanking.Add(new ScoreData(name, score));
         ScoreRanking.Sort();
+        Save();
     }
 
     [Serializable]

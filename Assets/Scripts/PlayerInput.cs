@@ -6,7 +6,7 @@ public class PlayerInput
 {
     bool isActive;
     float time = 0.0f;
-    const float interval = 0.3f;
+    const float interval = 0.8f;
     List<string> axislist = new List<string>();
     List<string> buttonlist = new List<string>();
     string X;
@@ -61,7 +61,7 @@ public class PlayerInput
     public int GetAxisPulse(EAxis axis)
     {
         float t = 0;
-        if (isActive && Mathf.Abs(t = GetAxisRaw(axis)) >= 1.0f)
+        if (isActive && Mathf.Abs(t = GetAxisRaw(axis)) >= 0.9f)
         {
             isActive = false;
             time = Time.time;

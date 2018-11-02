@@ -240,7 +240,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: shirome
-    second: {fileID: 2100008, guid: d064e5102fdc56e4da0953313d201b04, type: 3}
+    second: {fileID: 2100000, guid: 55b4e2fd56f1202489ae27d2d3162065, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
