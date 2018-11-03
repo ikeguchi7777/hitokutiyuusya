@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class name : MonoBehaviour {
 
@@ -150,7 +151,7 @@ public class name : MonoBehaviour {
             else if (flamex == 0 && flamey == 3)
             {
                 Ranking.Instance.AddScore(nametext.text, Ranking.Instance.Score);
-             
+                SceneManager.LoadScene("Title");
             }
         }
 

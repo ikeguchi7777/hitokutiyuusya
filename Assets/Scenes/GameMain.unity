@@ -231,7 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7074b1778357aad4dbf6523123640d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 1
   spawnPos:
   - {fileID: 682322205}
   - {fileID: 1916682717}
@@ -530,7 +529,7 @@ GameObject:
   - component: {fileID: 764171098}
   - component: {fileID: 764171097}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: UICamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
