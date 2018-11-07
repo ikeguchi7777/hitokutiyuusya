@@ -7,15 +7,6 @@ public class WitchUserControl : PlayerUserControl<WitchUserControl>
     [SerializeField] GameObject[] WeakMagic;
     [SerializeField] GameObject StrongMagic, SpecialMagic;
     [SerializeField] Transform socket;
-    protected override void AttackEnd()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void AttackStart()
-    {
-        throw new System.NotImplementedException();
-    }
 
     class StateWeakAttack : State<WitchUserControl>
     {

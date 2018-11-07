@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114584800281050714}
   - component: {fileID: 135295027695492520}
   - component: {fileID: 114483497776985578}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BossMagic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: LightningStrike
   playOnStart: 1
   loop: 0

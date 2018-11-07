@@ -89,9 +89,9 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
 
         public override void Execute()
         {
-            if (owner.targetTransform)
+            if (owner.target)
             {
-                owner.agent.SetDestination(owner.targetTransform.position);
+                owner.agent.SetDestination(owner.target.position);
                 if (owner.agent.remainingDistance < owner.agent.stoppingDistance)
                 {
                     owner.ChangeState(WeakEnemyState.Attack);
@@ -117,8 +117,8 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
 
         public override void Execute()
         {
-            if (owner.targetTransform && owner.agent.remainingDistance < owner.agent.stoppingDistance)
-                owner.agent.SetDestination(owner.targetTransform.position);
+            if (owner.target && owner.agent.remainingDistance < owner.agent.stoppingDistance)
+                owner.agent.SetDestination(owner.target.position);
             else
             {
                 owner.animator.SetBool("Attack", false);

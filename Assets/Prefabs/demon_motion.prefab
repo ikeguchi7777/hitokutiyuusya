@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114559296793527834}
   - component: {fileID: 195039371150165960}
   - component: {fileID: 114514219688291524}
+  - component: {fileID: 114134521654574952}
   m_Layer: 9
   m_Name: demon_motion
   m_TagString: Untagged
@@ -1182,6 +1183,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 20
   critical: 0.2
+--- !u!114 &114134521654574952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1010421134287990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0a3bf88a4b6fc4781c1cfad26f0738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_config:
+    icon: {fileID: 21300000, guid: 6234c135b66862343a7064d3fd530f02, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  playerSprites: []
 --- !u!114 &114216930297894968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1263,8 +1279,11 @@ MonoBehaviour:
   Defence: 0
   WincePoint: 10
   Critical: 0
+  MaxWalkSpeed: 2.451658
   breathDistance: 2
   MagicEffect: {fileID: 1391792482185828, guid: 5a2d28b1d957715428b2c90c6f3ce67e,
+    type: 2}
+  DeathEffect: {fileID: 1707375158983592, guid: b636200d63e1d1c41b13efa17a24a245,
     type: 2}
 --- !u!135 &135241171148417398
 SphereCollider:
@@ -1404,13 +1423,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 100
+  m_Speed: 5
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 45
   m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0

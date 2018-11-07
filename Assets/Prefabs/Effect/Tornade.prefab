@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 135520187307559630}
   - component: {fileID: 114138721937901830}
   - component: {fileID: 114354633237975610}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Tornade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: Tornade
   playOnStart: 1
   loop: 1

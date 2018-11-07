@@ -15,10 +15,11 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
 {
     [SerializeField] float Distance;
 
-    public Transform player { set; private get; }
+    public Transform player { set; get; }
     public Transform LockOnTransform { set; private get; }
     [SerializeField] private float _pitch = 20.0f, pmax = 70.0f, pmin = 0.0f;
-    public float Pitch {
+    public float Pitch
+    {
         get { return _pitch; }
         set
         {
@@ -33,10 +34,11 @@ public class PlayerCameraControl : StatefulObjectBase<PlayerCameraControl, Camer
     public float PitchRate;
     public float YawRate;
 
-    public void setParams(Transform player, float y)
+    public void setParams(Transform player, int id)
     {
         this.player = player;
-        Yaw = y % 360;
+        Yaw = (-90.0f * id) % 360;
+        GetComponent<PlayerUIControl>().SetUI(id, player);
     }
 
     protected override CameraState GetFirstState()

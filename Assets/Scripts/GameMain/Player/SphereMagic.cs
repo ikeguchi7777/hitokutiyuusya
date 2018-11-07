@@ -17,7 +17,7 @@ public class SphereMagic : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(-transform.forward * Time.deltaTime * speed);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 
     private void OnTriggerEnter(Collider other)

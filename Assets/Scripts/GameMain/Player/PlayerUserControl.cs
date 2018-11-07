@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,22 +16,64 @@ public enum PlayerState
     Death
 }
 
-public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable
+public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>, IDamageable,IPlayerEvent
     where T : PlayerUserControl<T>
 {
     protected int id;
     bool isDamage = false;
     protected PlayerMover playerMover;
     public GameObject LockOnObject { get; private set; }
-    [SerializeField] float Health = 100, Defence = 3, WincePoint = 1;
+    private Subject<float> HPSubject = new Subject<float>();
+    private Subject<float> strongSubject = new Subject<float>();
+    private Subject<float> specialSubject = new Subject<float>();
+
+    [SerializeField] float hp = 100, Defence = 3, WincePoint = 1;
     [SerializeField] float strongrecasttime, specialrecasttime;
     Recast strongRecast, specialRecast;
+
+    float Health
+    {
+        get { return hp; }
+        set
+        {
+            hp = value;
+            if (hp < 0.0f)
+                hp = 0.0f;
+            HPSubject.OnNext(hp);
+        }
+    }
+
+    public Subject<float> RemainHP
+    {
+        get
+        {
+            return HPSubject;
+        }
+    }
+
+    public Subject<float> SpecialGage
+    {
+        get
+        {
+            return specialSubject;
+        }
+    }
+
+    public Subject<float> StrongGage
+    {
+        get
+        {
+            return strongSubject;
+        }
+    }
 
     protected override void Update()
     {
         base.Update();
         specialRecast.AddTime(Time.deltaTime);
+        specialSubject.OnNext(specialRecast.rate());
         strongRecast.AddTime(Time.deltaTime);
+        strongSubject.OnNext(strongRecast.rate());
         if (PlayerInput.PlayerInputs[id].GetButtonDown(EButton.LockOn))
         {
             playerMover.SwitchLockOn();
@@ -38,6 +81,11 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         var camh = PlayerInput.PlayerInputs[id].GetAxis(EAxis.CamX);
         var camv = PlayerInput.PlayerInputs[id].GetAxis(EAxis.CamY);
         playerMover.CameraMove(camh, camv);
+    }
+
+    private void Start()
+    {
+        GetComponent<pointcache.Minimap.MinimapObject>().SetIcon(id);
     }
 
     protected override void Awake()
@@ -52,7 +100,6 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
     {
         this.id = id;
         playerMover.CameraFlag = 1 << id;
-        Debug.Log(id);
     }
     protected override PlayerState GetFirstState()
     {
@@ -69,6 +116,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
     IEnumerator Damage()
     {
+        ScoreBoard.Instance.isNoDamage[id] = false;
         isDamage = true;
         playerMover.Damage();
         yield return new WaitForSeconds(0.5f);
@@ -84,6 +132,8 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
     public void Damage(float atk, float cri)
     {
+        if (ScoreBoard.Instance.isWin)
+            return;
         var damage = Mathf.Clamp((Random.value <= cri ? 0 : -Defence) + atk, 0, float.MaxValue);
         Debug.Log(damage);
         Health -= damage;
@@ -98,8 +148,21 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         playerMover.Attack((int)type - (int)PlayerState.WeakAttack);
     }
 
-    protected abstract void AttackStart();
-    protected abstract void AttackEnd();
+    public void HealHP(float value)
+    {
+        StartCoroutine(CHealHP(value));
+    }
+
+    IEnumerator CHealHP(float value)
+    {
+        float time = 0.0f;
+        while (time<=3.0f)
+        {
+            time += Time.deltaTime;
+            Health += value * Time.deltaTime;
+            yield return null;
+        }
+    }
 
     #region State
     private class StateWait : State<T>
@@ -217,6 +280,11 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
             time += value;
             if (time > recast)
                 useable = true;
+        }
+
+        public float rate()
+        {
+            return time / recast;
         }
     }
 }

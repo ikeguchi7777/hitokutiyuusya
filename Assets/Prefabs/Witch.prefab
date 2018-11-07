@@ -852,6 +852,7 @@ GameObject:
   - component: {fileID: 114081793183310436}
   - component: {fileID: 136940472158282300}
   - component: {fileID: 54032956331964484}
+  - component: {fileID: 114525564110605684}
   m_Layer: 10
   m_Name: Witch
   m_TagString: Untagged
@@ -2109,6 +2110,25 @@ MonoBehaviour:
   m_TurnPow: 3
   isLockon: 0
   LockOnChangeInterval: 0.5
+--- !u!114 &114525564110605684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1738427410392074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0a3bf88a4b6fc4781c1cfad26f0738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_config:
+    icon: {fileID: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  playerSprites:
+  - {fileID: 21300000, guid: 0611e39dd2cec554dabd132ea9b648db, type: 3}
+  - {fileID: 21300000, guid: 88dd4cf967d1acc459a8918cb74b39bd, type: 3}
+  - {fileID: 21300000, guid: 3793d12e43bc97b4e93b1c1c65aaaaae, type: 3}
+  - {fileID: 21300000, guid: 85ee91186476ad545a6f49c6367b94b7, type: 3}
 --- !u!114 &114686396449350954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2120,7 +2140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10a9ca1a7d61f1479acec555b2b0c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  hp: 100
   Defence: 3
   WincePoint: 5
   strongrecasttime: 0
