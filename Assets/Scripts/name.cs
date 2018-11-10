@@ -29,7 +29,7 @@ public class name : MonoBehaviour {
         {"や","ゐ","ゆ","ゑ","よ","ゃ","ゅ","ょ","0","","","","","","","" },
         {"ら","り","る","れ","ろ","0","","","","","","","","","",""}, },
       { { "","0","","","","","","","","","","","","","",""},
-        {"わ","を","ん","ー","！","？","、","。","＆","w","0","","","","","" },
+        {"わ","を","ん","ー","！","？","、","。","＆","w","ゞ", "0","","","","" },
         {"","0","","","","","","","","","","","","","",""} } };
 
     // Use this for initialization
@@ -148,9 +148,10 @@ public class name : MonoBehaviour {
                     tempnametext = nametext.text;
                 }
             }
-            else if (flamex == 0 && flamey == 3)
+            else if (flamex == 0 && flamey == 3 && nametext.text.Length > 0)
             {
                 Ranking.Instance.AddScore(nametext.text, Ranking.Instance.Score);
+                Ranking.Instance.Save();
                 SceneManager.LoadScene("Title");
             }
         }
