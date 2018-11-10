@@ -130,6 +130,11 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
         {
         }
 
+        public override void Enter()
+        {
+            Ranking.Instance.Score = ScoreBoard.Instance.GetScore();
+        }
+
         public override void Execute()
         {
             if (Input.GetButtonDown("Submit"))

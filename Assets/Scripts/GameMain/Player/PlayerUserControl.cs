@@ -116,7 +116,6 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 
     IEnumerator Damage()
     {
-        ScoreBoard.Instance.isNoDamage[id] = false;
         isDamage = true;
         playerMover.Damage();
         yield return new WaitForSeconds(0.5f);
@@ -134,6 +133,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
     {
         if (ScoreBoard.Instance.isWin)
             return;
+        ScoreBoard.Instance.isNoDamage[id] = false;
         var damage = Mathf.Clamp((Random.value <= cri ? 0 : -Defence) + atk, 0, float.MaxValue);
         Debug.Log(damage);
         Health -= damage;
@@ -141,6 +141,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
             ChangeState(PlayerState.Death);
         else if (damage > WincePoint)
             StartCoroutine(Damage());
+        ScoreBoard.Instance.RemainHP[id] = Health;
     }
 
     protected void Attack(PlayerState type)
