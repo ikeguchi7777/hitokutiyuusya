@@ -10,13 +10,14 @@ using System.Collections;
 /// </summary>
 public class EffekseerEmitter : MonoBehaviour
 {
-	/// <summary xml:lang="en">
-	/// Effect name
-	/// </summary>
-	/// <summary xml:lang="ja">
-	/// エフェクト名
-	/// </summary>
-	public string effectName;
+    [SerializeField] float destroyTime = 0.0f;
+    /// <summary xml:lang="en">
+    /// Effect name
+    /// </summary>
+    /// <summary xml:lang="ja">
+    /// エフェクト名
+    /// </summary>
+    public string effectName;
 
 	/// <summary xml:lang="en">
 	/// Whether it does play the effect on Start()
@@ -230,6 +231,8 @@ public class EffekseerEmitter : MonoBehaviour
 			if (playOnStart) {
 				Play();
 			}
+            if (destroyTime > 0.0f)
+                Destroy(gameObject, destroyTime);
 		}
 	}
 	

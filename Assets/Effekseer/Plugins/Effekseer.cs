@@ -56,7 +56,7 @@ namespace Effekseer
 		public override bool Load(string path, AssetBundle assetBundle) {
 			texture = LoadAsset<Texture2D>(path, true, assetBundle);
 			if (texture == null) {
-				Debug.LogError("[Effekseer] Failed to load Texture: " + path);
+				Debug.Log("[Effekseer] Failed to load Texture: " + path);
 				return false;
 			}
 			return true;

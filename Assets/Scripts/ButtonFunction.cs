@@ -28,13 +28,15 @@ public class ButtonFunction : MonoBehaviour
 
     public void OpenRanking()
     {
-       // titlePanel.SetActive(false);
+       
+        titlePanel.SetActive(false);
         rankingPanel.SetActive(true);
     }
 
     public void CloseRanking()
     {
-       // titlePanel.SetActive(true);
+
+        titlePanel.SetActive(true);
         rankingPanel.SetActive(false);
     }
 }

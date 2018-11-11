@@ -931,6 +931,7 @@ GameObject:
   - component: {fileID: 114342196608215870}
   - component: {fileID: 136439563923800422}
   - component: {fileID: 54402473995047536}
+  - component: {fileID: 114686644109063936}
   m_Layer: 10
   m_Name: Monk
   m_TagString: Player
@@ -3061,7 +3062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edbe930899849945bff8b4d12d735e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  hp: 100
   Defence: 3
   WincePoint: 5
   strongrecasttime: 10
@@ -3070,6 +3071,25 @@ MonoBehaviour:
   heal: {fileID: 1234102084334996, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
   weak: {fileID: 1431359610748540, guid: c5141075656fad749a70e01ff1628702, type: 2}
   strong: {fileID: 1349140926735146, guid: ab8e3dbf1472ebe408c323c8fc90ee34, type: 2}
+--- !u!114 &114686644109063936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1599271107745530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0a3bf88a4b6fc4781c1cfad26f0738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_config:
+    icon: {fileID: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  playerSprites:
+  - {fileID: 21300000, guid: 0611e39dd2cec554dabd132ea9b648db, type: 3}
+  - {fileID: 21300000, guid: 88dd4cf967d1acc459a8918cb74b39bd, type: 3}
+  - {fileID: 21300000, guid: 3793d12e43bc97b4e93b1c1c65aaaaae, type: 3}
+  - {fileID: 21300000, guid: 85ee91186476ad545a6f49c6367b94b7, type: 3}
 --- !u!136 &136439563923800422
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -5,16 +5,6 @@ using UnityEngine;
 
 public class MonkUserControl : PlayerUserControl<MonkUserControl> {
     [SerializeField] GameObject socket, heal, weak, strong;
-    protected override void AttackEnd()
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override void AttackStart()
-    {
-        throw new NotImplementedException();
-    }
-
     protected override void StateListInit()
     {
         base.StateListInit();
@@ -47,6 +37,7 @@ public class MonkUserControl : PlayerUserControl<MonkUserControl> {
 
         public override void Enter()
         {
+            owner.Heal();
             owner.Attack(PlayerState.SpecialAttack);
         }
     }
@@ -55,6 +46,7 @@ public class MonkUserControl : PlayerUserControl<MonkUserControl> {
     {
         foreach (var player in InstantiateObjectManager.Instance.PlayerList)
         {
+            Debug.Log(player);
             Instantiate(heal, player.transform);
         }
     }

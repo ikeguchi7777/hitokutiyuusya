@@ -13,19 +13,24 @@ public class ScoreBoard : Singleton<ScoreBoard>
     public bool isWin { get; set; }
     public float RemainTime { get; set; }
     public bool[] isNoDamage { get; set; }
-    public int[] RemainHP { get; set; }
+    public float[] RemainHP { get; set; }
     public void Init(int playernum)
     {
         playerNum = playernum;
         isNoDamage = new bool[4];
-        RemainHP = new int[4];
+        RemainHP = new float[4];
         for (int i = 0; i < 4; i++)
         {
             if (PlayerID.Instance.PlayerTypes[i] != PlayerType.None)
+            {
                 isNoDamage[i] = true;
+                RemainHP[i] = 100;
+            }
             else
+            {
                 isNoDamage[i] = false;
-            RemainHP[i] = 0;
+                RemainHP[i] = 0;
+            }
         }
     }
 
@@ -39,7 +44,7 @@ public class ScoreBoard : Singleton<ScoreBoard>
         int sum = 0;
         foreach (var hp in RemainHP)
         {
-            sum += hp;
+            sum +=(int) hp;
         }
         if (sum == 0)
             return 0;

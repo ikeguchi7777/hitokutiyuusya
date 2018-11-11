@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager>
+public class InstantiateObjectManager : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPos;
     [SerializeField] private GameObject[] spawnObjects;
@@ -15,9 +15,11 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
     public List<LockOnable> EnemyList { get; set; }
     public List<PlayerMover> PlayerList { get; set; }
 
-    protected override void Awake()
+    public static InstantiateObjectManager Instance { get; private set; }
+
+    protected void Awake()
     {
-        base.Awake();
+        Instance = this;
         PlayerList = new List<PlayerMover>();
         playernum = 0;
         counter = 0;
@@ -26,6 +28,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             if (type != PlayerType.None)
                 playernum++;
         }
+        ScoreBoard.Instance.Init(playernum);
         for (int i = 0; i < 4; i++)
         {
             InstantiatePlayer(i, PlayerID.Instance.PlayerTypes[i]);
@@ -57,7 +60,7 @@ public class InstantiateObjectManager : SingletonObject<InstantiateObjectManager
             camera.tag = (id + 1) + "P";
             camera.rect = SetCam(counter, playernum);
             PlayerList.Add(spawnobj.GetComponent<PlayerMover>());
-            PlayerList[counter].setCamera(camera.GetComponent<PlayerCameraControl>(), -90.0f * id);
+            PlayerList[counter].setCamera(camera.GetComponent<PlayerCameraControl>(), id);
             counter++;
         }
     }

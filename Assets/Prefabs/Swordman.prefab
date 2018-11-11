@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 136219429286333530}
   - component: {fileID: 114697931458952004}
   - component: {fileID: 114648692433943102}
+  - component: {fileID: 114395720869974962}
   m_Layer: 10
   m_Name: Swordman
   m_TagString: Untagged
@@ -2591,11 +2592,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bca58f7b89f0b44826d5939ae9d474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  hp: 100
   Defence: 3
   WincePoint: 5
-  strongrecasttime: 0
-  specialrecasttime: 0
+  strongrecasttime: 5
+  specialrecasttime: 15
 --- !u!114 &114172199298654402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2609,6 +2610,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 10
   critical: 0.5
+--- !u!114 &114395720869974962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1200519260268616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0a3bf88a4b6fc4781c1cfad26f0738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_config:
+    icon: {fileID: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  playerSprites:
+  - {fileID: 21300000, guid: 0611e39dd2cec554dabd132ea9b648db, type: 3}
+  - {fileID: 21300000, guid: 88dd4cf967d1acc459a8918cb74b39bd, type: 3}
+  - {fileID: 21300000, guid: 3793d12e43bc97b4e93b1c1c65aaaaae, type: 3}
+  - {fileID: 21300000, guid: 85ee91186476ad545a6f49c6367b94b7, type: 3}
 --- !u!114 &114622520293558756
 MonoBehaviour:
   m_ObjectHideFlags: 1

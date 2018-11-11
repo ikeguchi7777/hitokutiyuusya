@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SelectAnime : MonoBehaviour
 {
 
-    public GameObject ReadyText;
+    
     private int state,joincount,readycount;
     public static bool[] ready = new bool[4];
     public static bool[] join = new bool[4];
@@ -15,20 +15,25 @@ public class SelectAnime : MonoBehaviour
     public Animator Select, Kenshi, Mahou, Souryo;
     [SerializeField] private int _id;
 
-    public Text textA, textB,textC;
-
+    //public Text textA, textB,textC;
+    public Text job;
+    public GameObject push,ok,start;
     // Use this for initialization
     void Start()
     {
         PlayerID.Instance.Init();
 
-        textA.text = "ボタンを押してください";
-        textB.text = "";
-        textC.text = "";
+        push.SetActive(true);
+        ok.SetActive(false);
+        start.SetActive(false);
+        job.text = "";
+       // textA.text = "ボタンを押してください";
+        //textB.text = "";
+        //textC.text = "";
         joincount = 0;        
         readycount = 0;
 
-        ReadyText.SetActive(false);
+        //ReadyText.SetActive(false);
         state = 0;
 
         for (int i = 0; i < 4; i++)
@@ -76,13 +81,13 @@ public class SelectAnime : MonoBehaviour
             {
 
                 case 1:
-                    textB.text = "剣士";
+                    job.text = "剣士";
                     break;
                 case 2:
-                    textB.text = "魔法使い";
+                    job.text = "魔法使い";
                     break;
                 case 3:
-                    textB.text = "僧侶";
+                    job.text = "僧侶";
                     break;
             }
         }
@@ -95,9 +100,10 @@ public class SelectAnime : MonoBehaviour
                 join[_id] = true;
                 Select.SetBool("join", true);
                 joincount ++;
+                push.SetActive(false);
 
-                textA.text = "";
-                textC.text = (_id + 1) + "P";
+                //textA.text = "";
+                //textC.text = (_id + 1) + "P";
                 state = 1;
 
 
@@ -109,6 +115,8 @@ public class SelectAnime : MonoBehaviour
                 Mahou.SetBool("Ready", ready[_id]);
                 Souryo.SetBool("Ready", ready[_id]);
                 type[_id] = state;
+
+                ok.SetActive(true);
                 for (int i = 0; i < 4; i++)
                 {
                     
@@ -117,7 +125,7 @@ public class SelectAnime : MonoBehaviour
 
             }
 
-            if (ready[_id] == true && ReadyText.activeSelf == true)
+            if (ready[_id] == true && start.activeSelf == true)
             {
 
                 for (int i = 0; i < 4; i++)
@@ -144,7 +152,7 @@ public class SelectAnime : MonoBehaviour
                 Kenshi.SetBool("Ready", ready[_id]);
                 Mahou.SetBool("Ready", ready[_id]);
                 Souryo.SetBool("Ready", ready[_id]);
-                
+                ok.SetActive(false);
             }
             else if(ready[_id] == false && join[_id] == true)
             {
@@ -152,9 +160,11 @@ public class SelectAnime : MonoBehaviour
                 Select.SetBool("join",false);
                 joincount--;
 
-                textA.text = "ボタンを押してください";
-                textB.text = "";
-                textC.text = "";
+                push.SetActive(true);
+                //textA.text = "ボタンを押してください";
+                //textB.text = "";
+                job.text = "";
+                //textC.text = "";
                 state = 0;
             }
 
@@ -164,13 +174,13 @@ public class SelectAnime : MonoBehaviour
 
 
 
-        ReadyText.transform.localScale = new Vector2(1 + Mathf.Pow(Mathf.Cos(Mathf.PI * Time.time), 2) * 0.3f, 1 + Mathf.Pow(Mathf.Cos(Mathf.PI * Time.time), 2) * 0.3f);
+        start.transform.localScale = new Vector2(6 + Mathf.Pow(Mathf.Cos(Mathf.PI * Time.time), 2) * 0.3f, 6 + Mathf.Pow(Mathf.Cos(Mathf.PI * Time.time), 2) * 0.3f);
 
     }
 
     public void Change()
     {
-        ReadyText.SetActive(false);
+        start.SetActive(false);
         readycount = 0;
         joincount = 0;
         for (int i = 0; i < 4; i++)
@@ -192,7 +202,7 @@ public class SelectAnime : MonoBehaviour
      
         if (readycount == joincount && joincount != 0)
         {
-            ReadyText.SetActive(true);
+            start.SetActive(true);
 
             
         }

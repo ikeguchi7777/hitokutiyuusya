@@ -3,15 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordmanControl : PlayerUserControl<SwordmanControl> {
-    protected override void AttackEnd()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void AttackStart()
-    {
-        throw new System.NotImplementedException();
-    }
 
     protected override void StateListInit()
     {

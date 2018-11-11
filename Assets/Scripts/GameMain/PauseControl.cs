@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PauseControl : MonoBehaviour {
     [SerializeField] GameObject pausePanel;
@@ -30,6 +31,11 @@ public class PauseControl : MonoBehaviour {
         InstantiateObjectManager.Instance.Resume();
         Time.timeScale = 1.0f;
         gameObject.SendMessage("ChangeState", GameState.Playing);
+    }
+
+    public void BackToTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
 
     void SetButton(int i)

@@ -13,14 +13,31 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
     protected Animator animator;
     protected EnemyWeapon enemyWeapon;
     protected float defaultAngularSpeed, defaultSpeed;
-    
+    protected float stopDistance = 1.5f;
+    private Transform _target;
+    private bool alive = true;
+
     [SerializeField] float Health, Attack, Defence, WincePoint;
     [SerializeField, Range(0, 1)] float Critical;
+    [SerializeField] protected float MaxWalkSpeed = 2.451658f;
 
     public int ID { get; set; }
 
     public int cameraFlag { get; set; }
     public bool AttackFlag { protected get; set; }
+    protected Transform target
+    {
+        get
+        {
+            if (InstantiateObjectManager.Instance.PlayerList.FindIndex(player => player.transform == _target) == -1)
+                SetTarget();
+            return _target;
+        }
+        set
+        {
+            _target = value;
+        }
+    }
 
     public Transform TargetTransform
     {
@@ -68,10 +85,15 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
 
     void IDamageable.Damage(float atk, float cri)
     {
+        if (!alive)
+            return;
         var damage = Mathf.Clamp((Random.value <= cri ? 1.5f : 1) * atk - Defence, 0, float.MaxValue);
         Health -= damage;
         if (Health <= 0)
+        {
             Death();
+            alive = false;
+        }
         else if (damage > WincePoint)
             Wince();
     }
@@ -83,6 +105,15 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
 
     //怯み
     abstract protected void Wince();
+
+    protected bool SetTarget()
+    {
+        var count = InstantiateObjectManager.Instance.PlayerList.Count;
+        if (count == 0)
+            return false;
+        _target = InstantiateObjectManager.Instance.PlayerList[Random.Range(0, count)].transform;
+        return true;
+    }
 }
 
 public interface LockOnable

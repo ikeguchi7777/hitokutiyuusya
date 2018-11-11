@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199183970270914038}
   - component: {fileID: 135134056812134476}
   - component: {fileID: 114089336536279404}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GreenCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4060792662848890}
   - component: {fileID: 198600955057599912}
   - component: {fileID: 199311704445290148}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SubEmitter0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4674806547269190}
   - component: {fileID: 198030002584165190}
   - component: {fileID: 199280291672716826}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SubEmitter1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 4932058337219192}
   - component: {fileID: 198770227462820088}
   - component: {fileID: 199978388317159432}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SubEmitter2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  destroy: 0
+  time: 5
 --- !u!135 &135134056812134476
 SphereCollider:
   m_ObjectHideFlags: 1

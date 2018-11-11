@@ -43,7 +43,7 @@ public class PlayerMover : MonoBehaviour
     public void SwitchLockOn()
     {
         isLockon = !isLockon;
-        m_Animator.SetBool("LockOn", isLockon);
+        //m_Animator.SetBool("LockOn", isLockon);
         ikLookAt.enabled = isLockon;
         if (isLockon)
         {
@@ -107,7 +107,7 @@ public class PlayerMover : MonoBehaviour
             direction.Normalize();
         float rad;
         var forward = direction.magnitude;
-        if (isLockon)
+        /*if (isLockon)
         {
             rad = -GetAngle(camForward, transform.forward) + GetAngle(camForward, direction);
 
@@ -117,7 +117,7 @@ public class PlayerMover : MonoBehaviour
                 forward = -forward;
             }
         }
-        else
+        else*/
             rad = GetAngle(transform.forward, direction);
         transform.localEulerAngles += new Vector3(0, Mathf.Clamp(rad, -m_TurnRate, m_TurnRate), 0);
         speed = m_MoveSpeed * Mathf.Pow((1 - Mathf.Abs(rad) / 180.0f), m_TurnPow);
@@ -140,10 +140,10 @@ public class PlayerMover : MonoBehaviour
         m_Animator.SetTrigger("Damage");
     }
 
-    public void setCamera(PlayerCameraControl cam, float y)
+    public void setCamera(PlayerCameraControl cam, int id)
     {
         playerCamera = cam;
-        playerCamera.setParams(transform, y);
+        playerCamera.setParams(transform, id);
     }
 
     public void CameraMove(float h, float v)

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4466128568571228}
   - component: {fileID: 198819678779863348}
   - component: {fileID: 199923867309290446}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ErekiSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4121725617652890}
   - component: {fileID: 108005091147720162}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 199832758046129880}
   - component: {fileID: 135615627600544466}
   - component: {fileID: 114938731237512850}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WeakMagic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -2,23 +2,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UniRx;
 
 public enum GameState
 {
     CountDown,
     Playing,
+    GameOver,
+    GameClear
 }
 public class GameControl : StatefulObjectBase<GameControl, GameState>
 {
     [SerializeField] Animation countdown;
     [SerializeField] float timeLimit = 300.0f;
-
+    [SerializeField] GameObject GameOverPanel;
     PauseControl pauseControl;
+    static Subject<float> timeSubject = new Subject<float>();
+
+    public static Subject<float> RemainTime
+    {
+        get
+        {
+            return timeSubject;
+        }
+    }
 
     protected override void Awake()
     {
         base.Awake();
         pauseControl = GetComponent<PauseControl>();
+        RemainTime.OnNext(1.0f);
     }
 
     protected override GameState GetFirstState()
@@ -30,6 +44,8 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
     {
         stateList.Add(new StateCountDown(this));
         stateList.Add(new StatePlaying(this));
+        stateList.Add(new StateGameOver(this));
+        stateList.Add(new StateGameClear(this));
     }
 
     class StateCountDown : State<GameControl>
@@ -40,6 +56,7 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
         public override void Enter()
         {
             time = 0.0f;
+            owner.countdown.gameObject.SetActive(true);
             owner.countdown.Play();
         }
 
@@ -79,10 +96,49 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
                 }
             }
             time += Time.deltaTime;
+            if (InstantiateObjectManager.Instance.PlayerList.Count == 0)
+                owner.ChangeState(GameState.GameOver);
+            RemainTime.OnNext(1.0f - time / owner.timeLimit);
             if (time >= owner.timeLimit)
             {
-                Debug.Log("時間切れ");
+                owner.ChangeState(GameState.GameOver);
             }
+        }
+    }
+
+    class StateGameOver : State<GameControl>
+    {
+        public StateGameOver(GameControl owner) : base(owner, GameState.GameOver)
+        {
+        }
+
+        public override void Enter()
+        {
+            owner.GameOverPanel.SetActive(true);
+        }
+
+        public override void Execute()
+        {
+            if (Input.GetButtonDown("Submit"))
+                SceneManager.LoadScene("Title");
+        }
+    }
+
+    class StateGameClear : State<GameControl>
+    {
+        public StateGameClear(GameControl owner) : base(owner, GameState.GameClear)
+        {
+        }
+
+        public override void Enter()
+        {
+            Ranking.Instance.Score = ScoreBoard.Instance.GetScore();
+        }
+
+        public override void Execute()
+        {
+            if (Input.GetButtonDown("Submit"))
+                SceneManager.LoadScene("Result");
         }
     }
 }

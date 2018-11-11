@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 136606433232983814}
   - component: {fileID: 54665812705026358}
   - component: {fileID: 114416084960204362}
+  - component: {fileID: 114038428257702828}
   m_Layer: 9
   m_Name: WeakEnemy
   m_TagString: Untagged
@@ -1347,6 +1348,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114038428257702828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138058008461544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0a3bf88a4b6fc4781c1cfad26f0738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_config:
+    icon: {fileID: 21300000, guid: c0e2c54bbca54404d9072ca7c57392f4, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  playerSprites: []
 --- !u!114 &114273980662844350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1363,6 +1379,7 @@ MonoBehaviour:
   Defence: 2
   WincePoint: 0
   Critical: 0.2
+  MaxWalkSpeed: 2.451658
 --- !u!114 &114409484559797466
 MonoBehaviour:
   m_ObjectHideFlags: 1
