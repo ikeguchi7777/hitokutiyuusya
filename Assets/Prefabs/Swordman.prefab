@@ -2597,6 +2597,7 @@ MonoBehaviour:
   WincePoint: 5
   strongrecasttime: 5
   specialrecasttime: 15
+  sword: {fileID: 114172199298654402}
 --- !u!114 &114172199298654402
 MonoBehaviour:
   m_ObjectHideFlags: 1

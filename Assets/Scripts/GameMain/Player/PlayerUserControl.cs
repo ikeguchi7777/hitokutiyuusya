@@ -189,16 +189,19 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
             else if (PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.WeakAttackAndSubmit))
             {
                 owner.ChangeState(PlayerState.WeakAttack);
+                return;
             }
             else if (owner.strongRecast.Useable && PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.StrongAttack))
             {
                 owner.strongRecast.Useable = false;
                 owner.ChangeState(PlayerState.StrongAttack);
+                return;
             }
             else if (owner.specialRecast.Useable && PlayerInput.PlayerInputs[owner.id].GetButtonDown(EButton.SpecialAttack))
             {
                 owner.specialRecast.Useable = false;
                 owner.ChangeState(PlayerState.SpecialAttack);
+                return;
             }
         }
 

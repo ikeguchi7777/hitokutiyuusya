@@ -48,6 +48,12 @@ public class BossControl : EnemyControl<BossControl, BossState>
         return BossState.Wait;
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        Debug.Log(stateMachine.CurrentState);
+    }
+
     protected override void StateListInit()
     {
         stateList.Add(new StateWait(this));
@@ -61,6 +67,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
     protected override void Wince()
     {
         animator.SetTrigger("Damage");
+        ChangeState(BossState.Idle);
     }
 
     class StateWait : State<BossControl>
@@ -241,7 +248,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
                 return;
             owner.animator.SetInteger("AttackType", (int)owner.attack);
             owner.animator.SetTrigger("Attack");
-            owner.ChangeState(BossState.Wait);
+            owner.ChangeState(BossState.Idle);
         }
 
         public override void Exit()
