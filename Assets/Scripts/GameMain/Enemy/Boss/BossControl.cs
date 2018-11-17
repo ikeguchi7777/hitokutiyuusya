@@ -66,6 +66,8 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
     protected override void Wince()
     {
+        if (Random.value < 0.7f)
+            return;
         animator.SetTrigger("Damage");
         ChangeState(BossState.Idle);
     }
@@ -168,7 +170,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
             owner.agent.SetDestination(owner.target.position);
             var forward = Vector3.Dot(t, owner.transform.forward);
             var angle = GetAngle(t);
-            if (owner.agent.remainingDistance <= owner.agent.stoppingDistance && Mathf.Abs(angle) <= 0.1f)
+            if (owner.agent.remainingDistance <= owner.agent.stoppingDistance && Mathf.Abs(angle) <= 0.05f)
             {
                 owner.ChangeState(BossState.Attack);
             }
@@ -209,7 +211,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
             owner.agent.SetDestination(owner.target.position);
             var forward = Vector3.Dot(t, owner.transform.forward);
             var angle = GetAngle(t);
-            if (owner.agent.remainingDistance <= owner.agent.stoppingDistance && Mathf.Abs(angle) <= 0.1f)
+            if (owner.agent.remainingDistance <= owner.agent.stoppingDistance && Mathf.Abs(angle) <= 0.05f)
             {
                 owner.ChangeState(BossState.Attack);
             }

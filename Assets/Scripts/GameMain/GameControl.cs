@@ -121,6 +121,7 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
         public override void Enter()
         {
             owner.GameOverPanel.SetActive(true);
+            owner.gameObject.GetComponent<IntroBGM>().PlayBgm("gameover");
         }
 
         public override void Execute()
