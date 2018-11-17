@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 199832758046129880}
   - component: {fileID: 135615627600544466}
   - component: {fileID: 114938731237512850}
+  - component: {fileID: 114298695789767498}
   m_Layer: 12
   m_Name: WeakMagic
   m_TagString: Untagged
@@ -141,6 +142,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114298695789767498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1431359610748540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7d0b5e517c7064f8c8c0aec201f6f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 5
+  critical: 1
 --- !u!114 &114938731237512850
 MonoBehaviour:
   m_ObjectHideFlags: 1

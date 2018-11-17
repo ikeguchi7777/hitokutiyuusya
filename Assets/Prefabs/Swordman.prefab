@@ -2593,7 +2593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  Defence: 3
+  Defence: 5
   WincePoint: 5
   strongrecasttime: 5
   specialrecasttime: 15

@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 199842184875220324}
   - component: {fileID: 135101077347417518}
   - component: {fileID: 114131896976140732}
+  - component: {fileID: 114854976064508526}
   m_Layer: 12
   m_Name: Weakattack1
   m_TagString: Untagged
@@ -186,6 +187,19 @@ MonoBehaviour:
   speed: 4
   destroy: 1
   time: 5
+--- !u!114 &114854976064508526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258797542417604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7d0b5e517c7064f8c8c0aec201f6f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 5
+  critical: 1
 --- !u!135 &135101077347417518
 SphereCollider:
   m_ObjectHideFlags: 1

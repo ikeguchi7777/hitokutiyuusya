@@ -1150,7 +1150,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!95 &95700548988075434
 Animator:
@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15a96da8721e7a44a34c3ebd11c80a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 0.5
+  attack: 0.3
   critical: 1
 --- !u!114 &114244388174049394
 MonoBehaviour:
@@ -1246,7 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15a96da8721e7a44a34c3ebd11c80a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 10
+  attack: 15
   critical: 0.1
 --- !u!114 &114514219688291524
 MonoBehaviour:
@@ -1274,9 +1274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6543e1f054fd4d14487d1234b9c7e3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  Health: 1000
   Attack: 0
-  Defence: 0
+  Defence: 5
   WincePoint: 10
   Critical: 0
   MaxWalkSpeed: 2.451658

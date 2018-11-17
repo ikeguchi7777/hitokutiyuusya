@@ -81,5 +81,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7d0b5e517c7064f8c8c0aec201f6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 15
+  attack: 50
   critical: 1

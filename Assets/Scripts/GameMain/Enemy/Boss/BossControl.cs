@@ -29,6 +29,11 @@ public class BossControl : EnemyControl<BossControl, BossState>
         Magic
     }
 
+    public void SetHP(int p_num)
+    {
+        Health *= (1.0f + (p_num - 1) * 0.5f);
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -38,20 +43,15 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
     readonly float[] interval = { 0.0f, 0.5f, 0.5f, 0.2f, 1.0f, 1.0f, 1.0f, 0.2f, 3.0f };
     [SerializeField] float breathDistance = 2.0f;
-    [SerializeField] GameObject MagicEffect,DeathEffect;
+    [SerializeField] GameObject MagicEffect, DeathEffect;
 
     float jumpDistance = 2.5f;
     BossAttackState attack = BossAttackState.None;
+    Vector3 magicTarget;
 
     protected override BossState GetFirstState()
     {
         return BossState.Wait;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        Debug.Log(stateMachine.CurrentState);
     }
 
     protected override void StateListInit()
@@ -94,14 +94,15 @@ public class BossControl : EnemyControl<BossControl, BossState>
                 owner.attack = BossAttackState.RotationAttack;
                 owner.ChangeState(BossState.Attack);
             }
-            else if (SetNearTarget() > owner.jumpDistance && 0.3f > Random.value)
+            else if (SetNearTarget() > owner.jumpDistance && 0.9f > Random.value)
                 owner.ChangeState(BossState.WalkToPlayerJump);
-            else if (0.1f> Random.value)
+            else if (0.1f > Random.value)
             {
+                owner.SetTarget();
                 owner.attack = BossAttackState.Magic;
                 owner.ChangeState(BossState.Attack);
             }
-            else if (0.1f > Random.value)
+            else if (0.15f > Random.value)
             {
                 owner.attack = BossAttackState.Shout;
                 owner.ChangeState(BossState.Attack);
@@ -149,6 +150,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
         public override void Enter()
         {
+            owner.SetTarget();
             var val = Random.value;
             owner.agent.stoppingDistance = 2.0f;
             owner.agent.SetDestination(owner.target.position);
@@ -198,6 +200,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
         {
             owner.agent.stoppingDistance = owner.jumpDistance;
             owner.attack = BossAttackState.JumpAttack;
+            owner.agent.SetDestination(owner.target.position);
         }
 
         public override void Execute()
@@ -215,6 +218,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
                 owner.animator.SetFloat("Forward", forward);
                 owner.animator.SetFloat("Right", angle);
             }
+            owner.agent.nextPosition = owner.transform.position;
         }
 
         float GetAngle(Vector3 dir)
@@ -246,6 +250,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
             owner.animator.SetFloat("Right", GetAngle(owner.agent.desiredVelocity));
             if (time < owner.interval[(int)owner.attack])
                 return;
+            owner.magicTarget = owner.target.position;
             owner.animator.SetInteger("AttackType", (int)owner.attack);
             owner.animator.SetTrigger("Attack");
             owner.ChangeState(BossState.Idle);
@@ -276,6 +281,8 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
         public override void Enter()
         {
+            owner.agent.updatePosition = false;
+            owner.agent.updateRotation = false;
             Instantiate(owner.DeathEffect, owner.transform.position, Quaternion.identity);
             Destroy(owner.gameObject, 6.0f);
         }
@@ -289,17 +296,19 @@ public class BossControl : EnemyControl<BossControl, BossState>
 
     public void CallEnemy()
     {
-        if (attack == BossAttackState.Shout)
-            InstantiateObjectManager.Instance.InstantiateCallEnemy();
+        InstantiateObjectManager.Instance.InstantiateCallEnemy();
     }
 
     public void Magic()
     {
-        Instantiate(MagicEffect, target.position, Quaternion.identity);
+        Instantiate(MagicEffect, magicTarget, Quaternion.identity);
     }
 
     protected override void OnDestroy()
     {
+        var obj = InstantiateObjectManager.Instance.gameObject;
+        if (obj)
+            obj.SendMessage("ChangeState", GameState.GameClear);
         base.OnDestroy();
     }
 

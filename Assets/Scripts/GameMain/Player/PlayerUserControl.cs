@@ -21,6 +21,7 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
 {
     protected int id;
     bool isDamage = false;
+    bool isInvincible = false;
     protected PlayerMover playerMover;
     public GameObject LockOnObject { get; private set; }
     private Subject<float> HPSubject = new Subject<float>();
@@ -129,13 +130,20 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
         }*/
     }
 
+    public void Invisible(int state)
+    {
+        if (state == 1)
+            isInvincible = true;
+        else
+            isInvincible = false;
+    }
+
     public void Damage(float atk, float cri)
     {
-        if (ScoreBoard.Instance.isWin)
+        if (ScoreBoard.Instance.isWin||isInvincible)
             return;
         ScoreBoard.Instance.isNoDamage[id] = false;
         var damage = Mathf.Clamp((Random.value <= cri ? 0 : -Defence) + atk, 0, float.MaxValue);
-        Debug.Log(damage);
         Health -= damage;
         if (Health <= 0)
             ChangeState(PlayerState.Death);
