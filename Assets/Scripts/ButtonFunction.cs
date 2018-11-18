@@ -7,6 +7,13 @@ public class ButtonFunction : MonoBehaviour
 {
     [SerializeField] GameObject titlePanel;
     [SerializeField] GameObject rankingPanel;
+
+
+     void Start()
+    {
+        Cursor.visible = false;
+    }
+
     public void LoadChooseScene()
     {
         SceneManager.LoadScene("Choose");
