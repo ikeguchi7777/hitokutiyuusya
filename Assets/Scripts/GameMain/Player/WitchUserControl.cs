@@ -45,6 +45,7 @@ public class WitchUserControl : PlayerUserControl<WitchUserControl>
 
     public void WeakAttack(int i)
     {
+        SEController.Instance.PlaySE(SEType.Magic);
         Instantiate(WeakMagic[i - 1], socket.position, playerMover.GetAttackQuaternion());
     }
 

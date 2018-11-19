@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 30
   critical: 1
+  se: 9
 --- !u!135 &135134056812134476
 SphereCollider:
   m_ObjectHideFlags: 1

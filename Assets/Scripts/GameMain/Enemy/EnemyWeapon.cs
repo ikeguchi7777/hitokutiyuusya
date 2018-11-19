@@ -38,6 +38,7 @@ public class EnemyWeapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        SEController.Instance.PlaySE(SEType.Slash);
         ExecuteEvents.Execute<IDamageable>(other.gameObject, null, (reciever, eventData) => reciever.Damage(attack, critical));
     }
 }

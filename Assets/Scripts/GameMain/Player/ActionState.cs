@@ -12,7 +12,10 @@ public class ActionState : StateMachineBehaviour {
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.gameObject.SendMessage("ResetFlags");
-        animator.gameObject.SendMessage("ChangeState", PlayerState.Moveable);
+        if (GameControl.isPlay)
+        {
+            animator.gameObject.SendMessage("ResetFlags");
+            animator.gameObject.SendMessage("ChangeState", PlayerState.Moveable);
+        }
     }
 }

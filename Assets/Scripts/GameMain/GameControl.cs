@@ -19,6 +19,7 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
     [SerializeField] GameObject GameOverPanel;
     PauseControl pauseControl;
     static Subject<float> timeSubject = new Subject<float>();
+    public static bool isPlay = false;
 
     public static Subject<float> RemainTime
     {
@@ -33,6 +34,7 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
         base.Awake();
         pauseControl = GetComponent<PauseControl>();
         RemainTime.OnNext(1.0f);
+        isPlay = false;
     }
 
     protected override GameState GetFirstState()
@@ -71,6 +73,8 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
 
         public override void Exit()
         {
+            Debug.Log("move");
+            GameControl.isPlay = true;
             InstantiateObjectManager.Instance.MoveCharactor();
         }
     }
@@ -108,6 +112,7 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
         }
         public override void Exit()
         {
+            GameControl.isPlay = false;
             ScoreBoard.Instance.RemainTime = owner.timeLimit - time;
         }
     }

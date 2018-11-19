@@ -28,10 +28,9 @@ public class SphereMagic : MonoBehaviour
             particle.TriggerSubEmitter(1);
             particle.TriggerSubEmitter(2);
             particle.Stop(false);
+            Destroy(gameObject, 1.0f);
         }
         if (destroy)
             Destroy(gameObject);
-        else
-            Destroy(gameObject, 1.0f);
     }
 }

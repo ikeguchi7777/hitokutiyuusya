@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 5
   critical: 1
+  se: 5
 --- !u!135 &135101077347417518
 SphereCollider:
   m_ObjectHideFlags: 1
