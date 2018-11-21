@@ -21,7 +21,7 @@ public class SaveData
         {
             if (savedatabase == null)
             {
-                string path = Application.dataPath + "/";
+                string path = Application.dataPath + "\\";
                 string fileName = Application.productName + ".savedata.json";
                 savedatabase = new SaveDataBase(path, fileName);
             }
@@ -236,10 +236,10 @@ public class SaveData
         /// <summary>
         /// クラスが破棄される時点でファイルに書き込みます。
         /// </summary>
-        ~SaveDataBase()
+        /*~SaveDataBase()
         {
             Save();
-        }
+        }*/
 
         #endregion
 
@@ -368,7 +368,7 @@ public class SaveData
 
         public void Save()
         {
-            using (StreamWriter writer = new StreamWriter(path + fileName, false, Encoding.GetEncoding("utf-8")))
+            using (StreamWriter writer = new StreamWriter(path + fileName, false, Encoding.Unicode))
             {
                 var serialDict = new Serialization<string, string>(saveDictionary);
                 serialDict.OnBeforeSerialize();
@@ -381,7 +381,7 @@ public class SaveData
         {
             if (File.Exists(path + fileName))
             {
-                using (StreamReader sr = new StreamReader(path + fileName, Encoding.GetEncoding("utf-8")))
+                using (StreamReader sr = new StreamReader(path + fileName, Encoding.Unicode))
                 {
                     if (saveDictionary != null)
                     {

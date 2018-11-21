@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 199183970270914038}
   - component: {fileID: 135134056812134476}
   - component: {fileID: 114089336536279404}
+  - component: {fileID: 114989973996017898}
   m_Layer: 12
   m_Name: GreenCore
   m_TagString: Untagged
@@ -150,6 +151,19 @@ MonoBehaviour:
   speed: 5
   destroy: 0
   time: 5
+--- !u!114 &114989973996017898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1349140926735146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7d0b5e517c7064f8c8c0aec201f6f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 30
+  critical: 1
 --- !u!135 &135134056812134476
 SphereCollider:
   m_ObjectHideFlags: 1

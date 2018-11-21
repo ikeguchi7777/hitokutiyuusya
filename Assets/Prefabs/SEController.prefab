@@ -19,8 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4373033673270770}
+  - component: {fileID: 114937879407508228}
   - component: {fileID: 114578283448060408}
-  - component: {fileID: 82740913481132860}
+  - component: {fileID: 82342666481780544}
   m_Layer: 0
   m_Name: SEController
   m_TagString: Untagged
@@ -41,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82740913481132860
+--- !u!82 &82342666481780544
 AudioSource:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,3 +161,16 @@ MonoBehaviour:
     type: 0
   - audio: {fileID: 8300000, guid: 41d75112e3fff3141aa936f843ec4480, type: 3}
     type: 3
+--- !u!114 &114937879407508228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1361342718282928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc425fca2b307b4895f79ba2a43ba4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _infoList: []
+  PlayAuto: 1

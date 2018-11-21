@@ -155,6 +155,9 @@ public class WeakEnemyControl : EnemyControl<WeakEnemyControl, WeakEnemyState>
 
         public override void Enter()
         {
+            owner.agent.updatePosition = false;
+            owner.agent.updateRotation = false;
+            ScoreBoard.Instance.addScore += 100;
             owner.animator.SetTrigger("Death");
             owner.gameObject.tag = "Untagged";
             InstantiateObjectManager.Instance.RemoveEnemy(owner);

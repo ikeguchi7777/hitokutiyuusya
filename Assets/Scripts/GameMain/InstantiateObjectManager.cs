@@ -35,6 +35,7 @@ public class InstantiateObjectManager : MonoBehaviour
         }
         EnemyList = new List<LockOnable>();
         boss = Instantiate(boss, Vector3.zero, Quaternion.identity);
+        boss.SendMessage("SetHP", playernum);
         //InstantiateEnemy();
     }
 

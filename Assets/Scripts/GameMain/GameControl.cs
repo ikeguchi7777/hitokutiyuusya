@@ -85,6 +85,8 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
 
         public override void Execute()
         {
+            if (ScoreBoard.Instance.isWin)
+                return;
             for (int i = 0; i < 4; i++)
             {
                 if (PlayerInput.PlayerInputs[i].GetButtonDown(EButton.Select))
@@ -104,6 +106,10 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
                 owner.ChangeState(GameState.GameOver);
             }
         }
+        public override void Exit()
+        {
+            ScoreBoard.Instance.RemainTime = owner.timeLimit - time;
+        }
     }
 
     class StateGameOver : State<GameControl>
@@ -115,6 +121,7 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
         public override void Enter()
         {
             owner.GameOverPanel.SetActive(true);
+            owner.gameObject.GetComponent<IntroBGM>().PlayBgm("gameover");
         }
 
         public override void Execute()
@@ -133,12 +140,12 @@ public class GameControl : StatefulObjectBase<GameControl, GameState>
         public override void Enter()
         {
             Ranking.Instance.Score = ScoreBoard.Instance.GetScore();
+            owner.StartCoroutine(LoadResult());
         }
-
-        public override void Execute()
+        IEnumerator LoadResult()
         {
-            if (Input.GetButtonDown("Submit"))
-                SceneManager.LoadScene("Result");
+            yield return new WaitForSeconds(1.0f);
+            SceneManager.LoadScene("Result");
         }
     }
 }

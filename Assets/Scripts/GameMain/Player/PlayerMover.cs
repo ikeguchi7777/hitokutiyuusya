@@ -118,7 +118,7 @@ public class PlayerMover : MonoBehaviour
             }
         }
         else*/
-            rad = GetAngle(transform.forward, direction);
+        rad = GetAngle(transform.forward, direction);
         transform.localEulerAngles += new Vector3(0, Mathf.Clamp(rad, -m_TurnRate, m_TurnRate), 0);
         speed = m_MoveSpeed * Mathf.Pow((1 - Mathf.Abs(rad) / 180.0f), m_TurnPow);
         m_Animator.SetFloat("Forward", forward);
@@ -149,7 +149,7 @@ public class PlayerMover : MonoBehaviour
     public void CameraMove(float h, float v)
     {
         playerCamera.Pitch += (v * playerCamera.PitchRate * Time.deltaTime);
-        if (isLockon)
+        if (isLockon && Mathf.Abs(h) > 0.7f)
         {
             if (Time.time - pastTime > LockOnChangeInterval)
             {

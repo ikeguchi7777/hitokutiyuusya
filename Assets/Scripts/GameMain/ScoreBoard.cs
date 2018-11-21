@@ -14,11 +14,14 @@ public class ScoreBoard : Singleton<ScoreBoard>
     public float RemainTime { get; set; }
     public bool[] isNoDamage { get; set; }
     public float[] RemainHP { get; set; }
+    public int addScore { get; set; }
     public void Init(int playernum)
     {
         playerNum = playernum;
         isNoDamage = new bool[4];
         RemainHP = new float[4];
+        isWin = false;
+        addScore = 0;
         for (int i = 0; i < 4; i++)
         {
             if (PlayerID.Instance.PlayerTypes[i] != PlayerType.None)
@@ -36,19 +39,19 @@ public class ScoreBoard : Singleton<ScoreBoard>
 
     public int GetScore()
     {
-        return (isWin ? 1500 : 0) + (int)RemainTime * remainTimeBonus + GetRemainHPBonus() + GetNoDamageBonus();
+        return (isWin ? 1500 : 0) + (int)RemainTime * remainTimeBonus + GetRemainHPBonus() + GetNoDamageBonus() + addScore;
     }
 
     int GetRemainHPBonus()
     {
-        int sum = 0;
+        float sum = 0;
         foreach (var hp in RemainHP)
         {
-            sum +=(int) hp;
+            sum += hp;
         }
         if (sum == 0)
             return 0;
-        return remainHPBonus * (100 * playerNum / sum);
+        return (int)(remainHPBonus * (sum / (100 * playerNum)));
     }
 
     int GetNoDamageBonus()

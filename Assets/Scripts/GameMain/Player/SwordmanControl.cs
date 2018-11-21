@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordmanControl : PlayerUserControl<SwordmanControl> {
-
+    [SerializeField] PlayerCollider sword;
     protected override void StateListInit()
     {
         base.StateListInit();
         stateList.Add(new StateWeakAttack(this));
         stateList.Add(new StateStrongAttack(this));
         stateList.Add(new StateSpecialAttack(this));
+    }
+
+    public void SetWeaponParams(float attack,float critical)
+    {
+        sword.SetParam(attack, critical);
     }
 
     class StateWeakAttack : State<SwordmanControl>

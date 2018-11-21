@@ -29,4 +29,12 @@ public class BossActionControl : MonoBehaviour
     {
         hip.enabled = isActive == 1;
     }
+
+    public void StopAll()
+    {
+        SetBreath(0);
+        SetLHand(0);
+        SetRHand(0);
+        SetHip(0);
+    }
 }

@@ -32,6 +32,7 @@ public class Ranking {
     public void Save()
     {
         SaveData.SetList("scoredata", ScoreRanking);
+        SaveData.Save();
     }
 
     public void Load()
@@ -42,12 +43,12 @@ public class Ranking {
     public void AddScore(string name,int score)
     {
         ScoreRanking.Add(new ScoreData(name, score));
-        ScoreRanking.Sort();
+        ScoreRanking.Sort((a,b)=>b.score-a.score);
         Save();
     }
 
     [Serializable]
-    public class ScoreData : IComparable<ScoreData>
+    public class ScoreData
     {
         public ScoreData(string name, int score)
         {
@@ -60,11 +61,6 @@ public class Ranking {
         public override string ToString()
         {
             return name + "," + score;
-        }
-
-        public int CompareTo(ScoreData obj)
-        {
-            return (score >= obj.score ? -1 : 1);
         }
     }
 }

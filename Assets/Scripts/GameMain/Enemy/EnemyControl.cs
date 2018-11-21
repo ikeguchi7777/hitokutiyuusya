@@ -17,7 +17,7 @@ where T : EnemyControl<T, TEnum> where TEnum : System.IConvertible
     private Transform _target;
     private bool alive = true;
 
-    [SerializeField] float Health, Attack, Defence, WincePoint;
+    [SerializeField]protected float Health, Attack, Defence, WincePoint;
     [SerializeField, Range(0, 1)] float Critical;
     [SerializeField] protected float MaxWalkSpeed = 2.451658f;
 

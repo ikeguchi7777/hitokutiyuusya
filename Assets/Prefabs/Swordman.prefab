@@ -2593,10 +2593,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  Defence: 3
+  Defence: 5
   WincePoint: 5
   strongrecasttime: 5
   specialrecasttime: 15
+  sword: {fileID: 114172199298654402}
 --- !u!114 &114172199298654402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2717,7 +2718,7 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200519260268616}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e69780fc21cd6374bb718978d4c8989f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.35

@@ -44,7 +44,7 @@ public class name : MonoBehaviour {
         scoretext.text = "Score:" + Ranking.Instance.Score.ToString();
         maxlength = 7;
 
-        homepos = new Vector2(-65.5f, -23.5f);
+        homepos = new Vector2(-35.5f, 30.0f);
         flame.transform.localPosition = homepos;
 
         for (int i = 0; i < 4; i++)

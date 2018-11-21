@@ -2143,11 +2143,11 @@ MonoBehaviour:
   hp: 100
   Defence: 3
   WincePoint: 5
-  strongrecasttime: 0
-  specialrecasttime: 0
+  strongrecasttime: 5
+  specialrecasttime: 10
   WeakMagic:
   - {fileID: 1258797542417604, guid: 00616e6679ee6ed4391362815f116bf8, type: 2}
-  - {fileID: 1258797542417604, guid: 00616e6679ee6ed4391362815f116bf8, type: 2}
+  - {fileID: 1954652035131818, guid: 6162a709c65ccad4aa81918969d4b5a3, type: 2}
   StrongMagic: {fileID: 1420186223186998, guid: 70dc707e51c35734b922ab4574cd0621,
     type: 2}
   SpecialMagic: {fileID: 1588898488897154, guid: 9e87527af4fb47d46ad58f27035cb4b9,
@@ -2159,7 +2159,7 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1738427410392074}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e69780fc21cd6374bb718978d4c8989f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3

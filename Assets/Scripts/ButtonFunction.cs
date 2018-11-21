@@ -19,6 +19,11 @@ public class ButtonFunction : MonoBehaviour
         SceneManager.LoadScene("Choose");
     }
 
+    public void LoadDescriptionScene()
+    {
+        SceneManager.LoadScene("Description");
+    }
+
     public void GameEnd()
     {
 #if UNITY_EDITOR

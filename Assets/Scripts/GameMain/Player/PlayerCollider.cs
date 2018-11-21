@@ -14,4 +14,10 @@ public class PlayerCollider : MonoBehaviour {
     {
         ExecuteEvents.Execute<IDamageable>(other, null, (reciever, eventData) => reciever.Damage(attack, 1));
     }
+
+    public void SetParam(float atk,float cri)
+    {
+        attack = atk;
+        critical = cri;
+    }
 }
