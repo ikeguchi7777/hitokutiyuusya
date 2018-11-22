@@ -30,7 +30,6 @@ public class PauseControl : MonoBehaviour {
         pausePanel.SetActive(false);
         InstantiateObjectManager.Instance.Resume();
         Time.timeScale = 1.0f;
-        gameObject.SendMessage("ChangeState", GameState.Playing);
     }
 
     public void BackToTitle()
