@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4373033673270770}
-  - component: {fileID: 114937879407508228}
   - component: {fileID: 114578283448060408}
   - component: {fileID: 82342666481780544}
   m_Layer: 0
@@ -52,7 +51,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -150,27 +149,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SEList:
   - audio: {fileID: 8300000, guid: 957f0be2ce197fa4ba1ae46016d65dd7, type: 3}
-    type: 2
-  - audio: {fileID: 8300000, guid: db4cca6a984dae6449d91055b9a8dee4, type: 3}
-    type: 4
-  - audio: {fileID: 8300000, guid: fa5f7b486d906b54c855dc1d3e567d8e, type: 3}
-    type: 5
-  - audio: {fileID: 8300000, guid: c5c4f54b7477b864db9f78b5974718e2, type: 3}
-    type: 1
-  - audio: {fileID: 8300000, guid: dc2437dde85b1c14298df3767e48b986, type: 3}
-    type: 0
-  - audio: {fileID: 8300000, guid: 41d75112e3fff3141aa936f843ec4480, type: 3}
     type: 3
---- !u!114 &114937879407508228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1361342718282928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfc425fca2b307b4895f79ba2a43ba4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _infoList: []
-  PlayAuto: 1
+  - audio: {fileID: 8300000, guid: d6e3f30a417e66447a8e0242813f5ec8, type: 3}
+    type: 5
+  - audio: {fileID: 8300000, guid: fa5f7b486d906b54c855dc1d3e567d8e, type: 3}
+    type: 6
+  - audio: {fileID: 8300000, guid: c5c4f54b7477b864db9f78b5974718e2, type: 3}
+    type: 2
+  - audio: {fileID: 8300000, guid: dc2437dde85b1c14298df3767e48b986, type: 3}
+    type: 1
+  - audio: {fileID: 8300000, guid: ee013b00667fb5f4f8090ff835d16f23, type: 3}
+    type: 8
+  - audio: {fileID: 8300000, guid: 41d75112e3fff3141aa936f843ec4480, type: 3}
+    type: 4
+  - audio: {fileID: 8300000, guid: 48b786ee67df7b6439ddfb92724ed80e, type: 3}
+    type: 7
+  - audio: {fileID: 8300000, guid: 97b3e665be8c7d14a8849130305fae77, type: 3}
+    type: 9

@@ -40,6 +40,8 @@ public abstract class PlayerUserControl<T> : StatefulObjectBase<T, PlayerState>,
             hp = value;
             if (hp < 0.0f)
                 hp = 0.0f;
+            else if (hp > 100.0f)
+                hp = 100.0f;
             HPSubject.OnNext(hp);
         }
     }

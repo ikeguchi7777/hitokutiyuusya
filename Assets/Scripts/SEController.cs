@@ -4,12 +4,16 @@ using UnityEngine;
 
 public enum SEType
 {
+    None,
     Select,
     Submit,
     Cancel,
     Slash,
     BlowTone,
-    Heal
+    Heal,
+    Page,
+    Magic,
+    Exprosion
 }
 
 public class SEController : SingletonObject<SEController> {
@@ -24,6 +28,11 @@ public class SEController : SingletonObject<SEController> {
 
     public void PlaySE(SEType type)
     {
+        if (type == SEType.None)
+        {
+            Debug.Log("割り当てなし");
+            return;
+        }
         var t = SEList.Find(se => se.type == type);
 #if UNITY_EDITOR
         if (t == null)

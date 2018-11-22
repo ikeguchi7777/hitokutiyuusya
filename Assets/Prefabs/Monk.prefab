@@ -3017,9 +3017,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894e1579cb6bc374bb290c8caae1c432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAtWeight: 1
-  bodyWeight: 0.4
-  headWeight: 0.7
+  lookAtWeight: 0.7
+  bodyWeight: 0.3
+  headWeight: 0.35
   eyesWeight: 0.5
   clampWeight: 0.5
 --- !u!114 &114342196608215870
@@ -3066,7 +3066,7 @@ MonoBehaviour:
   Defence: 3
   WincePoint: 5
   strongrecasttime: 10
-  specialrecasttime: 10
+  specialrecasttime: 40
   socket: {fileID: 1827717930729058}
   heal: {fileID: 1234102084334996, guid: 5e3a7eb360f60f3418fdc2c20e296933, type: 2}
   weak: {fileID: 1431359610748540, guid: c5141075656fad749a70e01ff1628702, type: 2}

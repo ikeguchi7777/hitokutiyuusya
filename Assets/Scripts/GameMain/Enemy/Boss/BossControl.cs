@@ -96,7 +96,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
                 owner.attack = BossAttackState.RotationAttack;
                 owner.ChangeState(BossState.Attack);
             }
-            else if (SetNearTarget() > owner.jumpDistance && 0.9f > Random.value)
+            else if (SetNearTarget() > owner.jumpDistance && 0.2f > Random.value)
                 owner.ChangeState(BossState.WalkToPlayerJump);
             else if (0.1f > Random.value)
             {
@@ -123,7 +123,7 @@ public class BossControl : EnemyControl<BossControl, BossState>
             int count = 0;
             foreach (var player in InstantiateObjectManager.Instance.PlayerList)
             {
-                if (GetDirection(player.transform.position).magnitude <= 1.4f)
+                if (GetDirection(player.transform.position).magnitude <= 2.5f)
                     count++;
             }
             return count;

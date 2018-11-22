@@ -2595,8 +2595,8 @@ MonoBehaviour:
   hp: 100
   Defence: 5
   WincePoint: 5
-  strongrecasttime: 5
-  specialrecasttime: 15
+  strongrecasttime: 7
+  specialrecasttime: 20
   sword: {fileID: 114172199298654402}
 --- !u!114 &114172199298654402
 MonoBehaviour:
@@ -2611,6 +2611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 10
   critical: 0.5
+  se: 4
 --- !u!114 &114395720869974962
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,9 +5,11 @@ using UnityEngine.EventSystems;
 
 public class BossCollider : MonoBehaviour {
     [SerializeField] float attack, critical;
+    [SerializeField] SEType se = SEType.None;
 
     private void OnTriggerEnter(Collider other)
     {
+        SEController.Instance.PlaySE(se);
         ExecuteEvents.Execute<IDamageable>(other.gameObject, null, (reciever, eventData) => reciever.Damage(attack, critical));
     }
 

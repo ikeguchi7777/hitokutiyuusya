@@ -44,6 +44,7 @@ public class MonkUserControl : PlayerUserControl<MonkUserControl> {
 
     public void Heal()
     {
+        SEController.Instance.PlaySE(SEType.Heal);
         foreach (var player in InstantiateObjectManager.Instance.PlayerList)
         {
             Debug.Log(player);
@@ -53,11 +54,13 @@ public class MonkUserControl : PlayerUserControl<MonkUserControl> {
 
     public void StrongAttack()
     {
+        SEController.Instance.PlaySE(SEType.Magic);
         Instantiate(strong, socket.transform.position, playerMover.GetAttackQuaternion());
     }
 
     public void WeakAttack()
     {
+        SEController.Instance.PlaySE(SEType.Magic);
         Instantiate(weak, socket.transform.position, playerMover.GetAttackQuaternion());
     }
 }
