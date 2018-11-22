@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45033216, g: 0.49805313, b: 0.56293815, a: 1}
+  m_IndirectSpecularColor: {r: 0.4503317, g: 0.49805212, b: 0.5629373, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: Tornade
   playOnStart: 1
   loop: 1
@@ -369,6 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: SonicBoom
   playOnStart: 1
   loop: 1
@@ -413,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: Thunder
   playOnStart: 1
   loop: 1
@@ -440,7 +443,7 @@ GameObject:
   - component: {fileID: 1334697179}
   - component: {fileID: 1334697178}
   m_Layer: 0
-  m_Name: boss_death
+  m_Name: boss_death2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -457,7 +460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectName: boss_death
+  destroyTime: 0
+  effectName: boss_death2
   playOnStart: 1
   loop: 1
   isAutoDestroy: 0
@@ -501,6 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: swordeffect3
   playOnStart: 1
   loop: 1
@@ -617,6 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: LightningStrike
   playOnStart: 1
   loop: 1
@@ -703,6 +709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: blowhit
   playOnStart: 1
   loop: 1
@@ -747,6 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyTime: 0
   effectName: fireball
   playOnStart: 1
   loop: 1
