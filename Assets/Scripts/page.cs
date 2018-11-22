@@ -54,6 +54,7 @@ public class page : MonoBehaviour {
         {
             if (pagenum > 0)
             {
+                SEController.Instance.PlaySE(SEType.Page);
                 pagenum--;
                 StartCoroutine("Backflick");
 
@@ -68,7 +69,7 @@ public class page : MonoBehaviour {
             }
             if (pagenum < 4)
             {
-
+                SEController.Instance.PlaySE(SEType.Page);
                 pagenum++;
                 StartCoroutine("Nextflick");
             }
@@ -91,7 +92,7 @@ public class page : MonoBehaviour {
 
             Ani.SetTrigger("back1");
             paper.SetActive(true);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.3f);
 
             pages[0].material = Lpages[pagenum];
             pages[1].material = Rpages[pagenum];
@@ -114,7 +115,7 @@ public class page : MonoBehaviour {
 
         Ani.SetTrigger("next1");
         paper.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.3f);
 
         pages[0].material = Lpages[pagenum];
         pages[1].material = Rpages[pagenum];

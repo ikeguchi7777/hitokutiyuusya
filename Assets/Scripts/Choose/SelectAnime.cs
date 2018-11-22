@@ -55,7 +55,7 @@ public class SelectAnime : MonoBehaviour
 
         if (t == 1 && join[_id] == true && ready[_id] == false)
         {
-          //  Debug.Log(t);
+            SEController.Instance.PlaySE(SEType.Select);
             state++;
 
             if (state >= 4)
@@ -66,7 +66,7 @@ public class SelectAnime : MonoBehaviour
         }
         if (t == -1 && join[_id] == true && ready[_id] == false)
         {
-            Debug.Log(t);
+            SEController.Instance.PlaySE(SEType.Select);
             state--;
             if (state <= 0)
             {
@@ -95,8 +95,10 @@ public class SelectAnime : MonoBehaviour
 
         if (PlayerInput.PlayerInputs[_id].GetButtonDown(EButton.WeakAttackAndSubmit))
         {
+            SEController.Instance.PlaySE(SEType.Submit);
             if (join[_id] == false)
             {
+               
                 join[_id] = true;
                 Select.SetInteger("State",state);
                 Select.SetBool("join", true);
@@ -149,6 +151,7 @@ public class SelectAnime : MonoBehaviour
         {
             if (ready[_id] == true)
             {
+                SEController.Instance.PlaySE(SEType.Cancel);
                 ready[_id] = false;
                 Kenshi.SetBool("Ready", ready[_id]);
                 Mahou.SetBool("Ready", ready[_id]);
@@ -157,6 +160,7 @@ public class SelectAnime : MonoBehaviour
             }
             else if(ready[_id] == false && join[_id] == true)
             {
+                SEController.Instance.PlaySE(SEType.Cancel);
                 join[_id] = false;
                 Select.SetBool("join",false);
                 
