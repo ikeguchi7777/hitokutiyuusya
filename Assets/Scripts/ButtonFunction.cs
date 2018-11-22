@@ -7,9 +7,21 @@ public class ButtonFunction : MonoBehaviour
 {
     [SerializeField] GameObject titlePanel;
     [SerializeField] GameObject rankingPanel;
+
+
+     void Start()
+    {
+        Cursor.visible = false;
+    }
+
     public void LoadChooseScene()
     {
         SceneManager.LoadScene("Choose");
+    }
+
+    public void LoadDescriptionScene()
+    {
+        SceneManager.LoadScene("Description");
     }
 
     public void GameEnd()
@@ -28,12 +40,14 @@ public class ButtonFunction : MonoBehaviour
 
     public void OpenRanking()
     {
+       
         titlePanel.SetActive(false);
         rankingPanel.SetActive(true);
     }
 
     public void CloseRanking()
     {
+
         titlePanel.SetActive(true);
         rankingPanel.SetActive(false);
     }

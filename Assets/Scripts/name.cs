@@ -17,6 +17,7 @@ public class name : MonoBehaviour {
     private Vector2 homepos;
     public int[,] t = new int[4,2];
     public bool[] b2 = new bool[4];
+    public bool[] b3 = new bool[4];
     private int[,] kanalocation = new int[4, 3];
     private string[,,] kana = new string[,,]
     { { { "あ", "い", "う", "え", "お", "ぁ", "ぃ", "ぅ", "ぇ", "ぉ" ,"0","","","","",""},
@@ -29,7 +30,7 @@ public class name : MonoBehaviour {
         {"や","ゐ","ゆ","ゑ","よ","ゃ","ゅ","ょ","0","","","","","","","" },
         {"ら","り","る","れ","ろ","0","","","","","","","","","",""}, },
       { { "","0","","","","","","","","","","","","","",""},
-        {"わ","を","ん","ー","！","？","、","。","＆","w","0","","","","","" },
+        {"わ","を","ん","ー","！","？","、","。","＆","w","ゞ", "0","","","","" },
         {"","0","","","","","","","","","","","","","",""} } };
 
     // Use this for initialization
@@ -44,7 +45,7 @@ public class name : MonoBehaviour {
         scoretext.text = "Score:" + Ranking.Instance.Score.ToString();
         maxlength = 7;
 
-        homepos = new Vector2(-65.5f, -23.5f);
+        homepos = new Vector2(-35.5f, 30.0f);
         flame.transform.localPosition = homepos;
 
         for (int i = 0; i < 4; i++)
@@ -66,10 +67,12 @@ public class name : MonoBehaviour {
             t[i, 0] = PlayerInput.PlayerInputs[i].GetAxisPulseName(EAxis.X);
             t[i, 1] = PlayerInput.PlayerInputs[i].GetAxisPulseName(EAxis.Y);
             b2[i] = PlayerInput.PlayerInputs[i].GetButtonDown(EButton.WeakAttackAndSubmit);
+            b3[i] = PlayerInput.PlayerInputs[i].GetButtonDown(EButton.Evade);
         }
 
         if (t[0, 1] + t[1, 1] + t[2, 1] + t[3, 1] > 0)
         {
+            SEController.Instance.PlaySE(SEType.Select);
             flamey--;
             if (flamey < 0)
             {
@@ -83,6 +86,7 @@ public class name : MonoBehaviour {
         }
         else if (t[0, 1] + t[1, 1] + t[2, 1] + t[3, 1] < 0)
         {
+            SEController.Instance.PlaySE(SEType.Select);
             flamey++;
             if (flamey > 3)
             {
@@ -96,6 +100,7 @@ public class name : MonoBehaviour {
         }
         else if (t[0, 0] + t[1, 0] + t[2, 0] + t[3, 0] < 0)
         {
+            SEController.Instance.PlaySE(SEType.Select);
             flamex--;
             if (flamex < 0)
             {
@@ -109,6 +114,7 @@ public class name : MonoBehaviour {
         }
         else if (t[0, 0] + t[1, 0] + t[2, 0] + t[3, 0] > 0)
         {
+            SEController.Instance.PlaySE(SEType.Select);
             flamex++;
             if (flamex > 2)
             {
@@ -128,11 +134,13 @@ public class name : MonoBehaviour {
         {
             if (!(flamex == 2 && flamey == 3) && !(flamex == 0 && flamey == 3) && selecttime <= 0 && nametext.text.Length < maxlength)
             {
+                SEController.Instance.PlaySE(SEType.Submit);
                 selecttime = settime;
                 inputcheck = 1;
             }
             else if (!(flamex == 2 && flamey == 3) && !(flamex == 0 && flamey == 3) && selecttime > 0)
             {
+                SEController.Instance.PlaySE(SEType.Submit);
                 selecttime = settime;
                 kanalocation[flamey, flamex]++;
                 if (kana[flamey, flamex, kanalocation[flamey, flamex]] == "0")
@@ -142,21 +150,38 @@ public class name : MonoBehaviour {
             }
             else if (flamex == 2 && flamey == 3)
             {
+                SEController.Instance.PlaySE(SEType.Cancel);
                 if (nametext.text.Length > 0)
                 {
                     nametext.text = nametext.text.Remove(nametext.text.Length - 1, 1);
                     tempnametext = nametext.text;
                 }
             }
-            else if (flamex == 0 && flamey == 3)
+            else if (flamex == 0 && flamey == 3 && nametext.text.Length > 0 )
             {
+                SEController.Instance.PlaySE(SEType.Submit);
                 Ranking.Instance.AddScore(nametext.text, Ranking.Instance.Score);
+                Ranking.Instance.Save();
                 SceneManager.LoadScene("Title");
             }
         }
 
 
-        if (selecttime > 0)
+
+        if (b3[0] || b3[1] || b3[2] || b3[3])
+        {
+            
+                if(nametext.text.Length > 0)
+                {
+                SEController.Instance.PlaySE(SEType.Cancel);
+                nametext.text = nametext.text.Remove(nametext.text.Length - 1, 1);
+                    tempnametext = nametext.text;
+                }
+
+
+        }
+
+            if (selecttime > 0)
         {
             selecttime -= Time.deltaTime;            
             nametext.text = tempnametext + kana[flamey, flamex, kanalocation[flamey, flamex]];
