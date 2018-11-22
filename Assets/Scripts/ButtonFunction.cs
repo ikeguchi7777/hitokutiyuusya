@@ -12,6 +12,7 @@ public class ButtonFunction : MonoBehaviour
      void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void LoadChooseScene()

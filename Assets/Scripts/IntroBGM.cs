@@ -9,16 +9,22 @@ using System.Linq;
 [RequireComponent(typeof(AudioSource))]
 public class IntroBGM : MonoBehaviour
 {
+    static IntroBGM instance;
+
     [SerializeField]
     private List<SoundInfo> _infoList;
     private BgmDefine _currentBgmDefine;
     [SerializeField]
     private bool PlayAuto = true;
 
+
     private AudioSource _currentBgmSource;
 
     private void Awake()
     {
+        Clear();
+        instance = this;
+        DontDestroyOnLoad(this);
         _currentBgmSource = GetComponent<AudioSource>();
         if (PlayAuto && _infoList != null)
         {
@@ -65,6 +71,12 @@ public class IntroBGM : MonoBehaviour
                 _currentBgmSource.time = _currentBgmDefine.loopTime;
             }
         }
+    }
+
+    public static void Clear()
+    {
+        if (instance)
+            Destroy(instance.gameObject);
     }
 
 }
