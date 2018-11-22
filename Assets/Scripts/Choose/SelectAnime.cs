@@ -34,7 +34,7 @@ public class SelectAnime : MonoBehaviour
         readycount = 0;
 
         //ReadyText.SetActive(false);
-        state = 0;
+        state = 1;
 
         for (int i = 0; i < 4; i++)
         {
@@ -98,13 +98,14 @@ public class SelectAnime : MonoBehaviour
             if (join[_id] == false)
             {
                 join[_id] = true;
+                Select.SetInteger("State",state);
                 Select.SetBool("join", true);
                 joincount ++;
                 push.SetActive(false);
 
                 //textA.text = "";
                 //textC.text = (_id + 1) + "P";
-                state = 1;
+                
 
 
             }
@@ -158,6 +159,7 @@ public class SelectAnime : MonoBehaviour
             {
                 join[_id] = false;
                 Select.SetBool("join",false);
+                
                 joincount--;
 
                 push.SetActive(true);
@@ -165,7 +167,8 @@ public class SelectAnime : MonoBehaviour
                 //textB.text = "";
                 job.text = "";
                 //textC.text = "";
-                state = 0;
+                //Select.SetInteger("State", 1);
+                //state = 1;
             }
 
             Change();

@@ -1535,6 +1535,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114937879407508228, guid: f88f57a65ce444e42a00bb1494d71ba8,
+        type: 2}
+      propertyPath: _infoList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4373033673270770, guid: f88f57a65ce444e42a00bb1494d71ba8, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1566,6 +1571,26 @@ Prefab:
     - target: {fileID: 4373033673270770, guid: f88f57a65ce444e42a00bb1494d71ba8, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937879407508228, guid: f88f57a65ce444e42a00bb1494d71ba8,
+        type: 2}
+      propertyPath: _infoList.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 566f4d8832ac8094586fc736a9680dcd, type: 3}
+    - target: {fileID: 114937879407508228, guid: f88f57a65ce444e42a00bb1494d71ba8,
+        type: 2}
+      propertyPath: _infoList.Array.data[0].define.loopTime
+      value: 3.096774
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937879407508228, guid: f88f57a65ce444e42a00bb1494d71ba8,
+        type: 2}
+      propertyPath: _infoList.Array.data[0].define.endTime
+      value: 65.03226
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937879407508228, guid: f88f57a65ce444e42a00bb1494d71ba8,
+        type: 2}
+      propertyPath: _infoList.Array.data[0].define.key
+      value: title
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f88f57a65ce444e42a00bb1494d71ba8, type: 2}

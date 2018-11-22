@@ -17,6 +17,7 @@ public class name : MonoBehaviour {
     private Vector2 homepos;
     public int[,] t = new int[4,2];
     public bool[] b2 = new bool[4];
+    public bool[] b3 = new bool[4];
     private int[,] kanalocation = new int[4, 3];
     private string[,,] kana = new string[,,]
     { { { "あ", "い", "う", "え", "お", "ぁ", "ぃ", "ぅ", "ぇ", "ぉ" ,"0","","","","",""},
@@ -66,6 +67,7 @@ public class name : MonoBehaviour {
             t[i, 0] = PlayerInput.PlayerInputs[i].GetAxisPulseName(EAxis.X);
             t[i, 1] = PlayerInput.PlayerInputs[i].GetAxisPulseName(EAxis.Y);
             b2[i] = PlayerInput.PlayerInputs[i].GetButtonDown(EButton.WeakAttackAndSubmit);
+            b3[i] = PlayerInput.PlayerInputs[i].GetButtonDown(EButton.Evade);
         }
 
         if (t[0, 1] + t[1, 1] + t[2, 1] + t[3, 1] > 0)
@@ -157,7 +159,20 @@ public class name : MonoBehaviour {
         }
 
 
-        if (selecttime > 0)
+
+        if (b3[0] || b3[1] || b3[2] || b3[3])
+        {
+            
+                if(nametext.text.Length > 0)
+                {
+                    nametext.text = nametext.text.Remove(nametext.text.Length - 1, 1);
+                    tempnametext = nametext.text;
+                }
+
+
+        }
+
+            if (selecttime > 0)
         {
             selecttime -= Time.deltaTime;            
             nametext.text = tempnametext + kana[flamey, flamex, kanalocation[flamey, flamex]];
